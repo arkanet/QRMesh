@@ -23,6 +23,7 @@ function importUrl(community, channel) {
   return 'https://meshtastic.org/e/#' + field(1, settings).toString('base64url');
 }
 function buttons(rows) { return { inline_keyboard: rows }; }
+function row(text,callback_data){return [{text,callback_data}]}
 function communityKeyboard() {
   return buttons([...catalog.communities.map(c => [{ text: c.name, callback_data: 'c:' + c.id }]), [{ text: '🧩 QR multicanale · Meshtastic Only', url: MULTI_URL }]]);
 }
@@ -67,7 +68,7 @@ async function handle(update, token) {
   if (cb) await telegram('answerCallbackQuery', { callback_query_id: cb.id }, token);
   const data = cb?.data || '';
   const command = (msg?.text || '').trim().split(/\s+/)[0].split('@')[0].toLowerCase();
-  if (command === '/multi') { await send(chat, 'Configura fino a 8 canali Meshtastic in un unico QR, con impostazioni LoRa opzionali:\n' + MULTI_URL, token, buttons([[{ text: '🧩 Apri configuratore MULTI', url: MULTI_URL }]])); return; }
+  if (command === '/multi') { await send(chat, 'Scegli una community Meshtastic per configurare fino a 8 canali e i parametri LoRa direttamente nel bot:', token, buttons(catalog.communities.map((c,i)=>({c,i})).filter(x=>x.c.protocol==='meshtastic').map(x=>row(x.c.name,'multi:'+x.i)))); return; }
   if (data === 'home' || ['/start', '/help', '/community', '/channels', '/qr', '/link', '/multi'].includes(command)) {
     await send(chat, 'QRMesh — scegli una community per ottenere canali, QR e link.\n' + BASE_URL, token, communityKeyboard()); return;
   }
