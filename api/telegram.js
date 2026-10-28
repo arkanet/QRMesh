@@ -4,6 +4,7 @@ const catalog = require('../data/catalog.json');
 
 const API = 'https://api.telegram.org';
 const BASE_URL = 'https://allqrmesh.vercel.app/';
+const MULTI_URL = BASE_URL + 'multicanale.html';
 const PAGE_SIZE = 8;
 
 function encodeVarint(n) {
@@ -22,7 +23,7 @@ function importUrl(community, channel) {
 }
 function buttons(rows) { return { inline_keyboard: rows }; }
 function communityKeyboard() {
-  return buttons(catalog.communities.map(c => [{ text: c.name, callback_data: 'c:' + c.id }]));
+  return buttons([...catalog.communities.map(c => [{ text: c.name, callback_data: 'c:' + c.id }]), [{ text: '🧩 QR multicanale · Meshtastic Only', url: MULTI_URL }]]);
 }
 function channelKeyboard(id, page) {
   const entries = catalog.channels.map((c, index) => ({...c, index})).filter(c => c.community === id);
@@ -35,6 +36,7 @@ function channelKeyboard(id, page) {
   if (page < max) nav.push({ text: '▶', callback_data: 'p:' + id + ':' + (page + 1) });
   if (nav.length) rows.push(nav);
   rows.push([{ text: '🌐 Risorse community', callback_data: 's:' + id }]);
+  if (catalog.communities.find(c => c.id === id)?.protocol === 'meshtastic') rows.push([{ text: '🧩 Configura QR MULTI · Meshtastic Only', url: MULTI_URL }]);
   rows.push([{ text: '◀ Community', callback_data: 'home' }]);
   return buttons(rows);
 }
@@ -63,7 +65,8 @@ async function handle(update, token) {
   if (cb) await telegram('answerCallbackQuery', { callback_query_id: cb.id }, token);
   const data = cb?.data || '';
   const command = (msg?.text || '').trim().split(/\s+/)[0].split('@')[0].toLowerCase();
-  if (data === 'home' || ['/start', '/help', '/community', '/channels', '/qr', '/link'].includes(command)) {
+  if (command === '/multi') { await send(chat, 'Configura fino a 8 canali Meshtastic in un unico QR, con impostazioni LoRa opzionali:\n' + MULTI_URL, token, buttons([[{ text: '🧩 Apri configuratore MULTI', url: MULTI_URL }]])); return; }
+  if (data === 'home' || ['/start', '/help', '/community', '/channels', '/qr', '/link', '/multi'].includes(command)) {
     await send(chat, 'QRMesh — scegli una community per ottenere canali, QR e link.\n' + BASE_URL, token, communityKeyboard()); return;
   }
   if (data.startsWith('c:') || data.startsWith('p:')) {
