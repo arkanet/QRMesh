@@ -89,7 +89,8 @@ function createUrl(s){
 function next(raw){
   const {action,s}=parse(raw);
   if(action==='back')return screen(s,'communities');
-  if(action==='undo'){s.ids.pop();return screen(s,'communities')}\n  if(/^c\\d+$/.test(action)){const ci=Number(action.slice(1));if(!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic'||s.ids.length>=8)throw Error('Community non disponibile');s.ci=ci;return screen(s,'choose')}
+  if(action==='undo'){s.ids.pop();return screen(s,'communities')}
+  if(/^c\\d+$/.test(action)){const ci=Number(action.slice(1));if(!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic'||s.ids.length>=8)throw Error('Community non disponibile');s.ci=ci;return screen(s,'choose')}
   if(action.startsWith('a')&&/^a\d+$/.test(action)){
     const index=Number(action.slice(1));
     if(s.ids.length>=8||!catalog.channels[index]||catalog.channels[index].community!==catalog.communities[s.ci].id)throw Error('Canale non disponibile');
