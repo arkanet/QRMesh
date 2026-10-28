@@ -25,16 +25,16 @@ function parse(raw) {
   const parts=raw.split(':');if(parts.length!==8||parts[0]!=='m')throw Error('Stato MULTI non valido');
   const [_,action,ci,ids,fw,region,preset,power]=parts;
   const s=state(Number(ci),ids?ids.split('.').map(Number):[],Number(fw),Number(region),Number(preset),Number(power));
-  if(!Number.isSafeInteger(s.ci)||!catalog.communities[s.ci]||catalog.communities[s.ci].protocol!=='meshtastic'||s.ids.length>8||![s.fw,s.region,s.preset,s.power].every(Number.isSafeInteger)||s.ids.some(i=>!Number.isSafeInteger(i)||!catalog.channels[i]||catalog.channels[i].community!==catalog.communities[s.ci].id))throw Error('Stato MULTI non valido');
+  if(!Number.isSafeInteger(s.ci)||!catalog.communities[s.ci]||catalog.communities[s.ci].protocol!=='meshtastic'||s.ids.length>8||![s.fw,s.region,s.preset,s.power].every(Number.isSafeInteger)||s.ids.some(i=>!Number.isSafeInteger(i)||!catalog.channels[i]||!catalog.communities.some(c=>c.id===catalog.channels[i].community&&c.protocol==='meshtastic')))throw Error('Stato MULTI non valido');
   return {action,s};
 }
-function start(ci) { const s=state(ci);return screen(s,'choose') }
+function start(ci) { const s=state(ci);return screen(s,'communities') }
 function screen(s,stage) {
-  const community=catalog.communities[s.ci], chosen=s.ids.map((id,i)=>'CH'+i+' · '+catalog.channels[id].name);
-  const summary=community.name+' · MULTI\n'+(chosen.length?chosen.join('\n'):'Nessun canale selezionato');
+  const community=catalog.communities[s.ci], chosen=s.ids.map((id,i)=>'CH'+i+' · '+catalog.communities.find(c=>c.id===catalog.channels[id].community).name+' / '+catalog.channels[id].name);
+  const summary='QRMesh · MULTI Meshtastic\n'+(chosen.length?chosen.join('\n'):'Nessun canale selezionato');
   const rows=[];
   let text=summary;
-  if(stage==='choose'){
+  if(stage==='communities'){\n    text+='\\n\\nScegli la community per CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+':';\n    catalog.communities.forEach((c,i)=>{if(c.protocol==='meshtastic'&&catalog.channels.some(ch=>ch.community===c.id))rows.push(row(c.name,cb('c'+i,s)))});\n    if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));\n    if(s.ids.length)rows.push(row('↩ Rimuovi ultimo canale',cb('undo',s)));\n  } else if(stage==='choose'){
     text+='\n\nSeleziona CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+' (massimo 8):';
     catalog.channels.forEach((c,i)=>{if(c.community===community.id)rows.push(row(c.name,cb('a'+i,s)))});
     if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));
@@ -62,7 +62,7 @@ function screen(s,stage) {
     rows.push(row('✅ Genera QR multicanale',cb('send',s)));
     rows.push(row('✏️ Modifica configurazione LoRa',cb('lora',s)));
   }
-  if(stage!=='choose')rows.push(row('↩ Modifica canali',cb('back',s)));
+  if(stage!=='choose'&&stage!=='communities')rows.push(row('↩ Modifica canali',cb('back',s)));
   return {text,reply_markup:buttonRows(rows)};
 }
 function createUrl(s){
@@ -83,12 +83,12 @@ function createUrl(s){
 }
 function next(raw){
   const {action,s}=parse(raw);
-  if(action==='back')return screen(s,'choose');
-  if(action==='undo'){s.ids.pop();return screen(s,'choose')}
+  if(action==='back')return screen(s,'communities');
+  if(action==='undo'){s.ids.pop();return screen(s,'communities')}\n  if(/^c\\d+$/.test(action)){const ci=Number(action.slice(1));if(!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic'||s.ids.length>=8)throw Error('Community non disponibile');s.ci=ci;return screen(s,'choose')}
   if(action.startsWith('a')&&/^a\d+$/.test(action)){
     const index=Number(action.slice(1));
     if(s.ids.length>=8||!catalog.channels[index]||catalog.channels[index].community!==catalog.communities[s.ci].id)throw Error('Canale non disponibile');
-    s.ids.push(index);return screen(s,s.ids.length===8?'lora':'choose');
+    s.ids.push(index);return screen(s,s.ids.length===8?'lora':'communities');
   }
   if(!s.ids.length)throw Error('Seleziona almeno un canale');
   if(action==='finish')return screen(s,'lora');
@@ -109,7 +109,7 @@ function next(raw){
     if(![0,5,10,14,20,27,30].includes(power)||s.preset<0)throw Error('Potenza non valida');
     s.power=power;return screen(s,'confirm');
   }
-  if(action==='send')return {url:createUrl(s),caption:'QRMesh MULTI · '+catalog.communities[s.ci].name+'\n'+s.ids.map((i,n)=>'CH'+n+': '+catalog.channels[i].name).join('\n')+'\nVerifica la configurazione nell’app Meshtastic prima dell’uso.'};
+  if(action==='send')return {url:createUrl(s),caption:'QRMesh MULTI · '+'Meshtastic'+'\n'+s.ids.map((i,n)=>'CH'+n+': '+catalog.communities.find(c=>c.id===catalog.channels[i].community).name+' / '+catalog.channels[i].name).join('\n')+'\nVerifica la configurazione nell’app Meshtastic prima dell’uso.'};
   throw Error('Comando non riconosciuto');
 }
 module.exports={start,next,createUrl,parse};
