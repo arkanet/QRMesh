@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1060" viewBox="0 0 390 1060">
+<rect width="390" height="1060" fill="#0b1220"/>
+<text x="22" y="43" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#eaf1ff">◈ QRMesh</text>
+<text x="22" y="69" font-family="Arial,sans-serif" font-size="13" fill="#9aabc5">Configurazione multicanale Meshtastic</text>
+<rect x="18" y="94" width="354" height="720" rx="16" fill="#141f32" stroke="#2b3c55"/>
+<text x="36" y="130" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#eaf1ff">Configura il canale</text>
+<rect x="36" y="144" width="140" height="42" rx="8" fill="#2b3c55" stroke="#41516b"/>
+<text x="58" y="170" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#eaf1ff">SINGOLO</text>
+<rect x="186" y="144" width="160" height="42" rx="8" fill="#50dbad" stroke="#50dbad"/>
+<text x="241" y="162" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#06251c">MULTI</text>
+<text x="214" y="176" font-family="Arial,sans-serif" font-size="10" font-weight="400" fill="#06251c">Meshtastic Only</text>
+<rect x="36" y="221" width="318" height="131" rx="12" fill="#101b2c" stroke="#344760"/>
+<text x="49" y="244" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#50dbad">CH0 · PRIMARY</text>
+<text x="49" y="269" font-family="Arial,sans-serif" font-size="11" font-weight="400" fill="#9aabc5">Community</text>
+<rect x="49" y="276" width="292" height="28" rx="8" fill="#0b1526" stroke="#41516b"/>
+<text x="59" y="295" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">Meshtastic Italia Network</text>
+<text x="49" y="321" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">Canale: MediumFast</text>
+<rect x="36" y="364" width="318" height="131" rx="12" fill="#101b2c" stroke="#344760"/>
+<text x="49" y="387" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#50dbad">CH1 · SECONDARY</text>
+<text x="49" y="412" font-family="Arial,sans-serif" font-size="11" font-weight="400" fill="#9aabc5">Community</text>
+<rect x="49" y="419" width="292" height="28" rx="8" fill="#0b1526" stroke="#41516b"/>
+<text x="59" y="438" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">LoRaItalia</text>
+<text x="49" y="464" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">Canale: Canale community</text>
+<rect x="36" y="507" width="318" height="131" rx="12" fill="#101b2c" stroke="#344760"/>
+<text x="49" y="530" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#50dbad">CH2 · SECONDARY</text>
+<text x="49" y="555" font-family="Arial,sans-serif" font-size="11" font-weight="400" fill="#9aabc5">Community</text>
+<rect x="49" y="562" width="292" height="28" rx="8" fill="#0b1526" stroke="#41516b"/>
+<text x="59" y="581" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">Altra community Meshtastic</text>
+<text x="49" y="607" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#eaf1ff">Canale: Canale selezionato</text>
+<rect x="36" y="658" width="318" height="88" rx="12" fill="#101b2c" stroke="#344760"/>
+<text x="49" y="682" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#eaf1ff">Configurazione LoRa (opzionale)</text>
+<text x="49" y="707" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#b7c8e0">Meshtastic 2.7.x · EU_868</text>
+<text x="49" y="730" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#b7c8e0">MEDIUM_FAST · TX AUTO</text>
+<rect x="18" y="832" width="354" height="204" rx="16" fill="#141f32" stroke="#2b3c55"/>
+<text x="35" y="868" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#eaf1ff">QR e link di importazione</text>
+<rect x="130" y="885" width="130" height="130" rx="8" fill="#ffffff" stroke="#ffffff"/>
+<text x="35" y="1030" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#b7c8e0">QR unico per tutti i canali</text>
+</svg>
