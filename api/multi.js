@@ -34,11 +34,18 @@ function screen(s,stage) {
   const summary='QRMesh · MULTI Meshtastic\n'+(chosen.length?chosen.join('\n'):'Nessun canale selezionato');
   const rows=[];
   let text=summary;
-  if(stage==='communities'){\n    text+='\\n\\nScegli la community per CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+':';\n    catalog.communities.forEach((c,i)=>{if(c.protocol==='meshtastic'&&catalog.channels.some(ch=>ch.community===c.id))rows.push(row(c.name,cb('c'+i,s)))});\n    if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));\n    if(s.ids.length)rows.push(row('↩ Rimuovi ultimo canale',cb('undo',s)));\n  } else if(stage==='choose'){
+  if(stage==='communities'){
+    text+='\
+\
+Scegli la community per CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+':';
+    catalog.communities.forEach((c,i)=>{if(c.protocol==='meshtastic'&&catalog.channels.some(ch=>ch.community===c.id))rows.push(row(c.name,cb('c'+i,s)))});
+    if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));
+    if(s.ids.length)rows.push(row('↩ Rimuovi ultimo canale',cb('undo',s)));
+  } else if(stage==='choose'){
     text+='\n\nSeleziona CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+' (massimo 8):';
     catalog.channels.forEach((c,i)=>{if(c.community===community.id)rows.push(row(c.name,cb('a'+i,s)))});
     if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));
-    if(s.ids.length)rows.push(row('↩ Rimuovi ultimo canale',cb('undo',s)));
+    rows.push(row('↩ Cambia community',cb('back',s)));
   } else if(stage==='lora') {
     text+='\n\nVuoi includere la configurazione LoRa nel QR?';
     rows.push(row('📡 Sì, configura LoRa',cb('lora',s)),row('➡️ No, genera QR',cb('send',s)));
