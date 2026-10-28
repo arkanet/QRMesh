@@ -35,9 +35,7 @@ function screen(s,stage) {
   const rows=[];
   let text=summary;
   if(stage==='communities'){
-    text+='\
-\
-Scegli la community per CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+':';
+    text+='\n\nScegli la community per CH'+s.ids.length+(s.ids.length===0?' (PRIMARY)':' (SECONDARY)')+':';
     catalog.communities.forEach((c,i)=>{if(c.protocol==='meshtastic'&&catalog.channels.some(ch=>ch.community===c.id))rows.push(row(c.name,cb('c'+i,s)))});
     if(s.ids.length)rows.push(row('✅ Termina selezione canali',cb('finish',s)));
     if(s.ids.length)rows.push(row('↩ Rimuovi ultimo canale',cb('undo',s)));
