@@ -8,7 +8,8 @@ test('wizard generates QR for a Meshtastic community',()=>{
   assert.ok(ci>=0);
   const start=multi.start(ci);
   assert.match(start.text,/CH0/);
-  const community=start.reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:c'+ci+':'));\n  const choice=multi.next(community.callback_data).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:a'));
+  const community=start.reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:c'+ci+':'));
+  const choice=multi.next(community.callback_data).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:a'));
   assert.ok(choice);
   const next=multi.next(choice.callback_data);
   assert.match(next.text,/CH0/);
@@ -20,7 +21,8 @@ test('wizard generates QR for a Meshtastic community',()=>{
   assert.ok(Buffer.from(result.url.split('#')[1],'base64url').length>0);
 });
 test('wizard configures LoRa and includes it in ChannelSet',()=>{
-  const community=multi.start(ci).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:c'+ci+':'));\n  const choice=multi.next(community.callback_data).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:a'));
+  const community=multi.start(ci).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:c'+ci+':'));
+  const choice=multi.next(community.callback_data).reply_markup.inline_keyboard.flat().find(b=>b.callback_data.startsWith('m:a'));
   const selected=multi.next(choice.callback_data);
   const finish=selected.reply_markup.inline_keyboard.flat().find(b=>b.callback_data.includes(':finish:'));
   let screen=multi.next(finish.callback_data);
