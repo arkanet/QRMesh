@@ -1,0 +1,303 @@
+{
+  "communities": [
+    {
+      "id": "loraitalia",
+      "name": "LoRaItalia",
+      "protocol": "meshtastic",
+      "resources": [
+        {
+          "title": "Sito web",
+          "url": "https://www.loraitalia.it/"
+        },
+        {
+          "title": "Canali Meshtastic",
+          "url": "https://www.loraitalia.it/wiki/canali-meshtastic/"
+        },
+        {
+          "title": "Telegram community",
+          "url": "https://t.me/meshtastic_italia_community"
+        }
+      ]
+    },
+    {
+      "id": "rrp",
+      "name": "Rete Radio Prepper",
+      "protocol": "meshtastic",
+      "resources": [
+        {
+          "title": "Sito web",
+          "url": "https://prepperitalia.altervista.org/"
+        },
+        {
+          "title": "Telegram RRP",
+          "url": "https://t.me/reteradio"
+        },
+        {
+          "title": "Telegram emergenze",
+          "url": "https://t.me/prepper_italia"
+        }
+      ]
+    },
+    {
+      "id": "meshcoreitalia",
+      "name": "MeshCore Italia",
+      "protocol": "meshcore",
+      "resources": [
+        {
+          "title": "Sito web",
+          "url": "https://www.meshcoreitalia.it/"
+        },
+        {
+          "title": "Canali regionali",
+          "url": "https://www.meshcoreitalia.it/canali-regionali/"
+        },
+        {
+          "title": "Telegram",
+          "url": "https://t.me/meshcoreitalia"
+        }
+      ]
+    },
+    {
+      "id": "bayarea",
+      "name": "Bay Area MeshCore",
+      "protocol": "meshcore",
+      "resources": [
+        {
+          "title": "Sito web",
+          "url": "https://bayareameshcore.com/"
+        },
+        {
+          "title": "Canali pubblici",
+          "url": "https://bayareameshcore.com/channels/"
+        }
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "community": "loraitalia",
+      "name": "MediumFast",
+      "key": "AQ=="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Test",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "NewsFeed",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "OnlyBots",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Abruzzo",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Basilicata",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Calabria",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Campania",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Em-Ro",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Friuli-VG",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Lazio",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Liguria",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Lombardia",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Marche",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Molise",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Piemonte",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Puglia",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Sardegna",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Sicilia",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Toscana",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Trentino-AA",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Umbria",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "ValledAosta",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "Veneto",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "C-Ticino",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "loraitalia",
+      "name": "SanMarino",
+      "key": "FVNtESlvjcper4TmMzt4BuL9u8hWj4lrTvCskQqOoHk="
+    },
+    {
+      "community": "rrp",
+      "name": "RRP",
+      "key": "bFFpanZJWVkwZVFXaW1oTnhaT2U2bGYwb0l6Mkd4Szg="
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Public",
+      "key": "8b3387e9c5cdea6ac9e5edbaa115cd72"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Italia",
+      "key": "4c97bfe431abe20672259d9b6969dcec"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "San Marino",
+      "key": "4f46c0563d505de1f7800b3493899211"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "News",
+      "key": "3b1ffbd0af43c5178f8d0b8325bfea6d"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Meteo",
+      "key": "831af0f50b7bf143a4770c05ae3eb888"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Lazio",
+      "key": "a74308f1c2ebfd9bd4f3a91d55c99d28"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Piemonte",
+      "key": "5b9baef4c3d8751e2f9292f0b9f7b6a6"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Veneto",
+      "key": "857b5d56a1af8c4e735f65a735d9fbdf"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Lombardia",
+      "key": "7a3a988f77750266e364932d94ccf521"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Liguria",
+      "key": "bbcfed8df22e7a2163826481a06f584d"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Puglia",
+      "key": "c9ee0a57b688d2234462c039b2801fb6"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Umbria",
+      "key": "6b2ea82b21caf00487ca9fab023097b3"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Campania",
+      "key": "4959bf1e5d8c3c9bd9320db7a37267b3"
+    },
+    {
+      "community": "meshcoreitalia",
+      "name": "Marche",
+      "key": "d928f69eb7dc7cdfeeafecc030aedd88"
+    },
+    {
+      "community": "bayarea",
+      "name": "#test",
+      "key": "9cd8fcf22a47333b591d96a2b848b73f"
+    },
+    {
+      "community": "bayarea",
+      "name": "#bot",
+      "key": "eb50a1bcb3e4e5d7bf69a57c9dada211"
+    },
+    {
+      "community": "bayarea",
+      "name": "#healthcheck",
+      "key": "3ae59c2cda86744c75e68b3975a902ae"
+    },
+    {
+      "community": "bayarea",
+      "name": "#wardriving",
+      "key": "e3c26491e9cd321e3a6be50d57d54acf"
+    }
+  ]
+}
