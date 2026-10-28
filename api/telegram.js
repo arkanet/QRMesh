@@ -1,6 +1,7 @@
 'use strict';
 const QRCode = require('qrcode');
 const catalog = require('../data/catalog.json');
+const multi = require('./multi');
 
 const API = 'https://api.telegram.org';
 const BASE_URL = 'https://allqrmesh.vercel.app/';
@@ -25,6 +26,7 @@ function buttons(rows) { return { inline_keyboard: rows }; }
 function communityKeyboard() {
   return buttons([...catalog.communities.map(c => [{ text: c.name, callback_data: 'c:' + c.id }]), [{ text: '🧩 QR multicanale · Meshtastic Only', url: MULTI_URL }]]);
 }
+function modeKeyboard(id) { const c=catalog.communities.find(x=>x.id===id);if(!c)return communityKeyboard();if(c.protocol!=='meshtastic')return channelKeyboard(id,0);const ci=catalog.communities.indexOf(c);return buttons([[{text:'🔹 SINGOLO',callback_data:'single:'+id},{text:'🧩 MULTI',callback_data:'multi:'+ci}],[{text:'◀ Community',callback_data:'home'}]]); }
 function channelKeyboard(id, page) {
   const entries = catalog.channels.map((c, index) => ({...c, index})).filter(c => c.community === id);
   const max = Math.max(0, Math.ceil(entries.length / PAGE_SIZE) - 1);
@@ -69,12 +71,15 @@ async function handle(update, token) {
   if (data === 'home' || ['/start', '/help', '/community', '/channels', '/qr', '/link', '/multi'].includes(command)) {
     await send(chat, 'QRMesh — scegli una community per ottenere canali, QR e link.\n' + BASE_URL, token, communityKeyboard()); return;
   }
+  if (data.startsWith('multi:')) { const ci=Number(data.slice(6));if(!Number.isSafeInteger(ci)||!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic')return;const result=multi.start(ci);await send(chat,result.text,token,result.reply_markup);return; }
+  if (data.startsWith('m:')) { try {const result=multi.next(data);if(result.url)await photo(chat,result.caption+'\n'+result.url,result.url,token);else await send(chat,result.text,token,result.reply_markup);}catch(error){await send(chat,'Configurazione non valida: '+error.message+'\nRiparti dalla community con /start.',token);}return; }
+  if (data.startsWith('single:')) { const id=data.slice(7);const c=catalog.communities.find(x=>x.id===id);if(c)await send(chat,'Canali di '+c.name+' — seleziona un canale:',token,channelKeyboard(id,0));return; }
   if (data.startsWith('c:') || data.startsWith('p:')) {
     const parts = data.split(':');
     const id = parts[1];
     const c = catalog.communities.find(x => x.id === id);
     if (!c) return;
-    await send(chat, 'Canali di ' + c.name + ' — seleziona un canale:', token, channelKeyboard(id, Number(parts[2] || 0))); return;
+    await send(chat, c.protocol==='meshtastic'&&data.startsWith('c:')?'Come vuoi configurare i canali di '+c.name+'?':'Canali di '+c.name+' — seleziona un canale:', token, c.protocol==='meshtastic'&&data.startsWith('c:')?modeKeyboard(id):channelKeyboard(id, Number(parts[2] || 0))); return;
   }
   if (data.startsWith('s:') || command === '/social') {
     const id = data.startsWith('s:') ? data.slice(2) : null;
