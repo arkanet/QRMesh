@@ -5,10 +5,14 @@ const channels=[
 {p:'meshtastic',c:'LoRaItalia',n:'MediumFast',k:'AQ=='},
 ...['Test','NewsFeed','OnlyBots',...regional,'SanMarino'].map(n=>({p:'meshtastic',c:'LoRaItalia',n,k:loraKey})),
 {p:'meshtastic',c:'Rete Radio Prepper',n:'RRP',k:'bFFpanZJWVkwZVFXaW1oTnhaT2U2bGYwb0l6Mkd4Szg='},
+...[['MediumFast','AQ=='],['Italia','mQ=='],['Ita-Nord','hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ='],['Ita-Centro','hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ='],['Ita-Sud','hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ='],['Ita-Test','hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ='],['Ita-Help','hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ='],['RRP','bFFpanZJWVkwZVFXaW1oTnhaT2U2bGYwb0l6Mkd4Szg=']].map(([n,k])=>({p:'meshtastic',c:'Meshtastic Italia Network',n,k})),
+{p:'meshtastic',c:'Rete Radio Prepper',n:'AllerteRRP',k:'1SFJZEJnA1ACu8DP0hps2jqZ9QOHp7ZEXKmqf6gcEGU='},
 ...Object.entries({Public:'8b3387e9c5cdea6ac9e5edbaa115cd72',Italia:'4c97bfe431abe20672259d9b6969dcec','San Marino':'4f46c0563d505de1f7800b3493899211',News:'3b1ffbd0af43c5178f8d0b8325bfea6d',Meteo:'831af0f50b7bf143a4770c05ae3eb888',Lazio:'a74308f1c2ebfd9bd4f3a91d55c99d28',Piemonte:'5b9baef4c3d8751e2f9292f0b9f7b6a6',Veneto:'857b5d56a1af8c4e735f65a735d9fbdf',Lombardia:'7a3a988f77750266e364932d94ccf521',Liguria:'bbcfed8df22e7a2163826481a06f584d',Puglia:'c9ee0a57b688d2234462c039b2801fb6',Umbria:'6b2ea82b21caf00487ca9fab023097b3',Campania:'4959bf1e5d8c3c9bd9320db7a37267b3',Marche:'d928f69eb7dc7cdfeeafecc030aedd88'}).map(([n,k])=>({p:'meshcore',c:'MeshCore Italia',n,k})),
 ...Object.entries({'#test':'9cd8fcf22a47333b591d96a2b848b73f','#bot':'eb50a1bcb3e4e5d7bf69a57c9dada211','#healthcheck':'3ae59c2cda86744c75e68b3975a902ae','#wardriving':'e3c26491e9cd321e3a6be50d57d54acf'}).map(([n,k])=>({p:'meshcore',c:'Bay Area MeshCore',n,k}))
 ];
 const communityResources={
+'Meshtastic Italia Network':[{title:'Sito web',url:'https://www.meshtasticitalia.it/'},{title:'Telegram community',url:'https://t.me/MeshtasticItaliaUsersGroup'},{title:'Facebook community',url:'https://www.facebook.com/groups/1346187060851998/'}],
+
 'LoRaItalia':[{title:'Sito web',url:'https://www.loraitalia.it/'},{title:'Canali Meshtastic',url:'https://www.loraitalia.it/wiki/canali-meshtastic/'},{title:'Telegram community',url:'https://t.me/meshtastic_italia_community'}],
 'Rete Radio Prepper':[{title:'Sito web',url:'https://prepperitalia.altervista.org/'},{title:'Telegram RRP',url:'https://t.me/reteradio'},{title:'Telegram emergenze',url:'https://t.me/prepper_italia'}],
 'MeshCore Italia':[{title:'Sito web',url:'https://www.meshcoreitalia.it/'},{title:'Canali regionali',url:'https://www.meshcoreitalia.it/canali-regionali/'},{title:'Telegram',url:'https://t.me/meshcoreitalia'}],

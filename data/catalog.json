@@ -20,6 +20,25 @@
       ]
     },
     {
+      "id": "meshtasticitalia",
+      "name": "Meshtastic Italia Network",
+      "protocol": "meshtastic",
+      "resources": [
+        {
+          "title": "Sito web",
+          "url": "https://www.meshtasticitalia.it/"
+        },
+        {
+          "title": "Telegram community",
+          "url": "https://t.me/MeshtasticItaliaUsersGroup"
+        },
+        {
+          "title": "Facebook community",
+          "url": "https://www.facebook.com/groups/1346187060851998/"
+        }
+      ]
+    },
+    {
       "id": "rrp",
       "name": "Rete Radio Prepper",
       "protocol": "meshtastic",
@@ -298,6 +317,51 @@
       "community": "bayarea",
       "name": "#wardriving",
       "key": "e3c26491e9cd321e3a6be50d57d54acf"
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "MediumFast",
+      "key": "AQ=="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Italia",
+      "key": "mQ=="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Ita-Nord",
+      "key": "hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Ita-Centro",
+      "key": "hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Ita-Sud",
+      "key": "hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Ita-Test",
+      "key": "hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "Ita-Help",
+      "key": "hJ7/x9L+qJ5kL2nF8dG7hJ1vK4xM3nB5vC6xZ1aS2dQ="
+    },
+    {
+      "community": "meshtasticitalia",
+      "name": "RRP",
+      "key": "bFFpanZJWVkwZVFXaW1oTnhaT2U2bGYwb0l6Mkd4Szg="
+    },
+    {
+      "community": "rrp",
+      "name": "AllerteRRP",
+      "key": "1SFJZEJnA1ACu8DP0hps2jqZ9QOHp7ZEXKmqf6gcEGU="
     }
   ]
 }
