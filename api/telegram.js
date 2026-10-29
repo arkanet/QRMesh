@@ -116,7 +116,12 @@ async function handle(update, token) {
     const channel = catalog.channels[index];
     const c = catalog.communities.find(x => x.id === channel.community);
     const url = importUrl(c, channel);
-    if(data.startsWith('l:')) await send(chat,'🔗 '+c.name+' · '+channel.name+'\n'+url+'\nVerifica preset, regione e frequenza radio.',token,buttons([[{text:'📷 Mostra QR',callback_data:'q:'+index}],[{text:'📖 Comandi',callback_data:'help'}]]));
+    if (c.protocol === 'meshcore') {
+      await photo(chat, c.name + ' · ' + channel.name + '\nVerifica preset, regione e frequenza radio.', url, token);
+      await send(chat, url, token);
+      await send(chat, channel.name, token);
+      await send(chat, channel.key.toLowerCase(), token);
+    } else if(data.startsWith('l:')) await send(chat,'🔗 '+c.name+' · '+channel.name+'\n'+url+'\nVerifica preset, regione e frequenza radio.',token,buttons([[{text:'📷 Mostra QR',callback_data:'q:'+index}],[{text:'📖 Comandi',callback_data:'help'}]]));
     else await photo(chat, c.name + ' · ' + channel.name + '\n' + url + '\nVerifica preset, regione e frequenza radio.', url, token);
     return;
   }
