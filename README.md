@@ -37,7 +37,6 @@ Le chiavi dei canali pubblici non garantiscono riservatezza. Verificare sempre c
 
 Il frontend è statico: aprire `index.html` (SINGOLO) oppure `multicanale.html` (MULTI) in un browser, o pubblicarli su un host statico. La generazione dei QR richiede il caricamento della libreria esterna QRCode.js.
 
-Licenza: nessuna licenza esplicita è stata ancora dichiarata nel repository; aggiungerne una per definire formalmente i permessi open source.
 
 ## Bot Telegram (backend)
 
