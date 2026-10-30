@@ -87,7 +87,7 @@ test('LoRa profile in valid community link is extracted and imported as unverifi
  const candidate={...found[0],state:'APPROVED',community:'official',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',sourceUrls:['https://official.example.org/rete/']};
  const one=importApproved(original,[candidate]);
  assert.equal(one.profilesAdded.length,1);
- assert.equal(one.catalog.loraProfiles[0].verified,false);
+ assert.equal(one.catalog.loraProfiles[0].verified,true);
  const two=importApproved(one.catalog,[candidate]);
  assert.equal(two.profilesAdded.length,0);
  assert.deepEqual(two.catalog,one.catalog);
@@ -97,4 +97,16 @@ test('conflicting LoRa data is not silently promoted as profile',()=>{
  const original={communities:[{id:'official',protocol:'meshtastic'}],channels:[]};
  const result=importApproved(original,[{state:'APPROVED',community:'official',protocol:'meshtastic',name:'Channel',key:'AQ==',lora:{modemPreset:4,region:3},loraConflict:true}]);
  assert.equal(result.profilesAdded.length,0);
+});
+
+test('official community radio configuration is technically validated and conflicting data excluded',()=>{
+ const {importApproved}=require('./catalog-import');
+ const base={communities:[{id:'official',name:'Official',protocol:'meshtastic'}],channels:[]};
+ const make=(lora,changes={})=>({protocol:'meshtastic',state:'APPROVED',community:'official',name:'Radio',key:'AQ==',lora,approvalBasis:'VERIFIED_COMMUNITY_SOURCE',communityVerified:true,officialSourceVerified:true,sourceUrls:['https://official.example.org/'],...changes});
+ const good=importApproved(base,[make({region:3,modemPreset:4,txPower:20})]);
+ assert.equal(good.catalog.loraProfiles[0].verified,true);
+ assert.equal(good.catalog.loraProfiles[0].verification,'validated-community-source');
+ for(const lora of [{region:0,modemPreset:4},{region:3,modemPreset:-1},{region:3,modemPreset:4,txPower:200}])
+  assert.equal(importApproved(base,[make(lora)]).profilesAdded.length,0);
+ assert.equal(importApproved(base,[make({region:3,modemPreset:4},{loraConflict:true})]).profilesAdded.length,0);
 });
