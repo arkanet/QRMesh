@@ -17,4 +17,5 @@ jobs:
           node-version: '22'
       - run: node --test scripts/discovery/*.test.js
       - run: node --check scripts/discovery/nightly.js
+      - run: node --check scripts/discovery/scanner.js
       - run: node --check scripts/discovery/meshtastic-link.js
