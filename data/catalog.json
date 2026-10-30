@@ -377,6 +377,184 @@
       "community": "rrp",
       "name": "AllerteRRP",
       "key": "1SFJZEJnA1ACu8DP0hps2jqZ9QOHp7ZEXKmqf6gcEGU="
+    },
+    {
+      "community": "loraitalia",
+      "name": "RRP",
+      "key": "bFFpanZJWVkwZVFXaW1oTnhaT2U2bGYwb0l6Mkd4Szg=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://www.loraitalia.it/wiki/canali-meshtastic/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Italia",
+      "key": "gOnHpef95XisU5foCeW+jJzXYcuFO+mILQg9RsI/X6k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Abruzzo",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/abruzzo/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Basil",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/basilicata/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Campan",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/campania/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-EmRom",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/emilia-romagna/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Lazio",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/lazio/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Lomb",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/lombardia/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Marche",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/marche/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Molise",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/molise/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Piem",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/piemonte/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Puglia",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/puglia/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Toscana",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/toscana/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Umbria",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/umbria/"
+      ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Veneto",
+      "key": "DSYkjxUIRXeDjNjc1yIKnqFY5kluwJb3HHJ0yh0EJ4k=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/veneto/"
+      ]
+    }
+  ],
+  "loraProfiles": [
+    {
+      "id": "meshtasticitalia-f5838ecaaca17215",
+      "community": "meshtasticitalia",
+      "label": "Configurazione LoRa verificata",
+      "verified": true,
+      "verification": "validated-community-source",
+      "sourceUrl": "https://www.meshtasticitalia.it/",
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      }
+    },
+    {
+      "id": "sositalia-3e795a45fad73ab1",
+      "community": "sositalia",
+      "label": "Configurazione LoRa verificata",
+      "verified": true,
+      "verification": "validated-community-source",
+      "sourceUrl": "https://sos-italia.net/rete/",
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      }
     }
   ]
 }
