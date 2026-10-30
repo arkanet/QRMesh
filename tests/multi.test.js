@@ -61,3 +61,25 @@ test('each channel can come from a different Meshtastic community',()=>{
   choose('send');
   assert.ok(page.url);
 });
+
+test('verified LoRa profiles from any community can be selected in MULTI',()=>{
+ const profiles=(catalog.loraProfiles||[]).filter(p=>p.verified===true&&p.lora);
+ assert.ok(profiles.length);
+ const community=multi.start(ci).reply_markup.inline_keyboard.flat().find(x=>x.callback_data.startsWith('m:c'+ci+':'));
+ const choice=multi.next(community.callback_data).reply_markup.inline_keyboard.flat().find(x=>x.callback_data.startsWith('m:a'));
+ const picked=multi.next(choice.callback_data);
+ const finish=picked.reply_markup.inline_keyboard.flat().find(x=>x.callback_data.includes(':finish:'));
+ const ask=multi.next(finish.callback_data);
+ const yes=ask.reply_markup.inline_keyboard.flat().find(x=>x.callback_data.includes(':lora:'));
+ const options=multi.next(yes.callback_data);
+ assert.ok(options.reply_markup.inline_keyboard.flat().some(x=>x.text.includes('Personalizzata')));
+ const profile=options.reply_markup.inline_keyboard.flat().find(x=>x.callback_data.startsWith('m:v'));
+ assert.ok(profile);
+ const confirm=multi.next(profile.callback_data);
+ const send=confirm.reply_markup.inline_keyboard.flat().find(x=>x.callback_data.includes(':send:'));
+ const out=multi.next(send.callback_data);
+ assert.match(out.url,/^https:\/\/meshtastic.org\/e\/#/);
+ const decoded=require('../scripts/discovery/meshtastic-link').decodeMeshtastic(out.url);
+ assert.ok(decoded.lora);
+ assert.equal(decoded.lora.region,profiles[0].lora.region);
+});

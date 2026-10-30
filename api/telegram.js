@@ -27,6 +27,11 @@ function importUrl(community, channel) {
 function buttons(rows) { return { inline_keyboard: rows }; }
 function row(text,callback_data){return [{text,callback_data}]}
 function helpKeyboard(){return buttons([[{text:'🏠 Menu',callback_data:'home'}],[{text:'📡 Community',callback_data:'communities'}],[{text:'🧩 MULTI',callback_data:'multi-home'}]]);}
+function homeKeyboard(){return buttons([[{text:'📖 Comandi',callback_data:'help'}],[{text:'📡 Meshtastic',callback_data:'protocol:meshtastic'}],[{text:'📡 MeshCore',callback_data:'protocol:meshcore'}]]);}
+function protocolKeyboard(protocol,mode){
+ const listed=catalog.communities.filter(c=>c.protocol===protocol&&catalog.channels.some(ch=>ch.community===c.id));
+ return buttons([...listed.map(c=>row(c.name,protocol==='meshtastic'&&mode==='multi'?'multi:'+catalog.communities.indexOf(c):'single:'+c.id)),row('◀ Indietro',protocol==='meshtastic'?'protocol:meshtastic':'home')]);
+}
 function communityKeyboard() {
   return buttons([...catalog.communities.map(c => [{ text: c.name, callback_data: 'c:' + c.id }]), [{text:'🧩 MULTI Meshtastic',callback_data:'multi-home'}], [{text:'📖 Comandi',callback_data:'help'}]]);
 }
@@ -43,7 +48,7 @@ function channelKeyboard(id, page, output='qr') {
   if (nav.length) rows.push(nav);
   rows.push([{ text: '🌐 Risorse community', callback_data: 's:' + id }]);
   if (catalog.communities.find(c => c.id === id)?.protocol === 'meshtastic') rows.push([{ text: '🧩 Configura QR MULTI · Meshtastic Only', url: MULTI_URL }]);
-  rows.push([{ text: '◀ Community', callback_data: 'communities' }]);
+  rows.push([{ text: '◀ Lista Community', callback_data: catalog.communities.find(c=>c.id===id)?.protocol==='meshcore'?'protocol:meshcore':'protocol-single:meshtastic' }]);
   rows.push([{text:'📖 Comandi',callback_data:'help'}]);
   return buttons(rows);
 }
@@ -75,12 +80,16 @@ async function handle(update, token) {
   const command = (msg?.text || '').trim().split(/\s+/)[0].split('@')[0].toLowerCase();
   if(command==='/start'||command==='/restart'||data==='home'){
     if(command==='/start'||command==='/restart')try{await registerCommands(token)}catch(e){console.error('setMyCommands:',e.message)}
-    await send(chat,'QRMesh — scegli una community per ottenere canali, QR e link.\n'+BASE_URL,token,communityKeyboard());return;
+    await send(chat,'QRMesh — scegli il protocollo.\n'+BASE_URL,token,homeKeyboard());return;
   }
+  if(data==='protocol:meshtastic'){await send(chat,'Meshtastic — scegli la modalità:',token,buttons([row('🔹 Singolo','protocol-single:meshtastic'),row('🧩 Multi','protocol-multi:meshtastic'),row('◀ Menu','home')]));return;}
+  if(data==='protocol:meshcore'||data==='protocol-single:meshcore'){await send(chat,'MeshCore — Lista Community:',token,protocolKeyboard('meshcore','single'));return;}
+  if(data==='protocol-single:meshtastic'){await send(chat,'Meshtastic SINGOLO — Lista Community:',token,protocolKeyboard('meshtastic','single'));return;}
+  if(data==='protocol-multi:meshtastic'){await send(chat,'Meshtastic MULTI — Lista Community per CH0:',token,protocolKeyboard('meshtastic','multi'));return;}
   if(command==='/help'||data==='help'){await send(chat,HELP_TEXT,token,helpKeyboard());return;}
   if(command==='/back'||data==='communities'){await send(chat,'↩ Scegli una community:',token,communityKeyboard());return;}
   if(command==='/multi'||data==='multi-home'){
-    await send(chat,'Scegli una community Meshtastic per il QR MULTI:',token,buttons(catalog.communities.map((c,i)=>({c,i})).filter(x=>x.c.protocol==='meshtastic').map(x=>row(x.c.name,'multi:'+x.i)).concat([[{text:'📖 Comandi',callback_data:'help'}]])));return;
+    await send(chat,'Meshtastic MULTI — Lista Community per CH0:',token,protocolKeyboard('meshtastic','multi'));return;
   }
   if(['/community','/channels','/qr','/link','/social'].includes(command)){
     const action=command.slice(1);

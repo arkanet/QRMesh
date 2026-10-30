@@ -15,3 +15,11 @@ test('link and QR callbacks are separate',()=>{
  assert.match(src,/data\.startsWith\('q:'\)/);
  assert.match(src,/linkpick:/);
 });
+
+test('main bot menu presents protocol choices before communities',()=>{
+ assert.match(src,/function homeKeyboard\(\)/);
+ assert.match(src,/callback_data:'protocol:meshtastic'/);
+ assert.match(src,/callback_data:'protocol:meshcore'/);
+ assert.match(src,/callback_data:'protocol-single:meshtastic'/);
+ assert.match(src,/callback_data:'protocol-multi:meshtastic'/);
+});
