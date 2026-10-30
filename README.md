@@ -35,7 +35,7 @@ Le chiavi dei canali pubblici non garantiscono riservatezza. Verificare sempre c
 
 ## Sviluppo
 
-Il frontend è statico: aprire `index.html` (SINGOLO) oppure `multicanale.html` (MULTI) in un browser, o pubblicarli su un host statico. La generazione dei QR richiede il caricamento della libreria esterna QRCode.js.
+Il frontend è statico: servire la directory del repository via HTTP o pubblicarla su un host statico, affinché entrambe le pagine possano caricare `data/catalog.json`. La generazione dei QR richiede il caricamento della libreria esterna QRCode.js.
 
 
 ## Bot Telegram (backend)
@@ -68,7 +68,7 @@ unset TELEGRAM_BOT_TOKEN TELEGRAM_WEBHOOK_SECRET
 
 ### Catalogo e sicurezza
 
-Il catalogo backend è in `data/catalog.json`; la pagina web utilizza ancora il catalogo inline di `index.html`: **gli aggiornamenti ai canali vanno sincronizzati in entrambi** finché non verrà completata la migrazione a una sorgente unica. Il backend genera i QR in memoria tramite `qrcode` e non archivia utenti o messaggi.
+Il catalogo condiviso da SINGOLO, MULTI e bot è `data/catalog.json`. Il backend genera i QR in memoria tramite `qrcode` e non archivia utenti o messaggi.
 
 **Test:** `node --test tests/multi.test.js` (eseguiti anche da GitHub Actions nella workflow Telegram wizard tests).
 

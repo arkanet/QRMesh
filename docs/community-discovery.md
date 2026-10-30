@@ -1,20 +1,28 @@
-# QRMesh Public Discovery — automatic, no admin backend
+# Community Discovery
 
-## Where it searches
-The initial crawl starts from the official Meshtastic local-group directory, publicly available MeshCore channel pages, and public Bing RSS search results. No account, API token, login or private group access is required. Search RSS availability is best-effort: providers may throttle or change endpoints; a failed provider is reported rather than bypassed.
+La discovery individua community e canali Meshtastic/MeshCore tramite fonti pubbliche, senza autenticazione.
 
-## SEO-like queries and relevance
-Search queries: `meshtastic community channels qr`, `meshtastic local mesh group channel PSK`, `meshcore community channels key`, `meshcore network join channels`.
-The scoring vocabulary is in `data/discovery-config.json`, split into protocol, community and channel terms. Terms such as `mesh`, `network`, `community`, `regional`, `canali`, `channel`, `psk`, `qr code`, `join`, and `channelset` help rank links. No community-specific keyword (including SOS-Italia) is required.
+## Configurazione
 
-The crawler follows ranked links up to 5 levels, bounded by a global 80-page budget and per-domain limits. Search snippets are discovery hints only and **never** qualify as independent verification.
+Modificare `data/discovery-config.json`:
 
-## Automatic verification and publication
-The pipeline collects publicly displayed Meshtastic channel import links and supported public MeshCore channel text, validates extracted keys, and deduplicates evidence by canonical domain. **Community-first rule:** a valid channel found on the canonical official domain of a referenced community is automatically approved, provided that no conflicting key is found. The community is the trust anchor, not each individual channel. For isolated channels or those lacking a verified official community source, approval requires three independently hosted matching observations, at least 75% agreement, no conflicting keys, and an attested community association. External links from a community site remain supporting evidence, not automatically official. Generic default channels are not automatically approved merely because they appear on the open web; an official referenced community may legitimately publish such a channel. Evidence from an unauthenticated search result alone cannot attest a community's identity.
+- `keywords`: query e priorità dei collegamenti.
+- `maxDepth`: profondità massima.
+- `maxPages`: budget complessivo.
+- `maxLinksPerPage`: collegamenti per pagina.
+- `minimumIndependentSources`, `agreementRatio`: quorum per canali esterni.
 
-Only approved candidates can be written by `scripts/discovery/nightly.js` to `data/catalog.json`; reports redact unapproved PSKs. Updates are committed by the nightly workflow when running on the default branch, or through a manual dispatch where supported. GitHub scheduled workflows do **not** execute on a non-default development branch, so automatic overnight runs will remain dormant until the tested workflow is merged.
+## Verifica
 
-If the safety threshold is never met, **zero channels are approved**: this is correct, not a failed search. There is no admin panel and no manual review queue. The audit report is a CI artifact. The user-facing SINGOLO/MULTI selectors list only communities with approved catalog channels. Existing catalog entries are preserved.
+I canali validi pubblicati sul dominio ufficiale di una community referenziata vengono approvati in assenza di chiavi discordanti. I canali esterni richiedono un'identità di community attestata e il quorum previsto. Un risultato di ricerca non costituisce attestazione.
 
-## Tests
-`node --test scripts/discovery/*.test.js` and the branch CI's `live-audit` run automatic checks. No private Telegram/Facebook/Discord content or authenticated APIs are accessed. MeshCore structured community directories are potential future seed sources where their schema can be validated.
+Solo i canali approvati sono importati in `data/catalog.json`; le community prive di canali non compaiono nei selettori.
+
+## Esecuzione
+
+```sh
+node --test scripts/discovery/*.test.js
+node scripts/discovery/nightly.js
+```
+
+La scansione genera `data/discovery-report.json` e aggiorna il catalogo. Il workflow `Community discovery nightly` viene eseguito alle 03:00 Europe/Rome sul branch predefinito. Il workflow `Community discovery tests` allega il report `community-discovery-audit`.
