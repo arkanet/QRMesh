@@ -1,0 +1,11 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {importApproved}=require('./catalog-import');
+const base={communities:[{id:'community',name:'Community',protocol:'meshtastic'}],channels:[{community:'community',name:'Network',key:'old',approved:true,publishedAt:'2026-09-01T00:00:00Z'}]};
+const candidate=(x={})=>({state:'APPROVED',community:'community',protocol:'meshtastic',name:'Network',key:'new',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',communityVerified:true,officialSourceVerified:true,sourceUrls:['https://community.example.org/channels'],publishedAt:'2026-10-20T00:00:00Z',conflict:false,...x});
+test('newer verified key rotates and history is retained',()=>{const a=importApproved(base,[candidate()]);assert.equal(a.updated.length,1);assert.equal(a.catalog.channels[0].key,'new');assert.equal(a.catalog.channels[0].keyHistory[0].key,'old');const b=importApproved(a.catalog,[candidate()]);assert.equal(b.updated.length,0);assert.deepEqual(b.catalog,a.catalog)});
+test('older or undated keys cannot replace existing keys',()=>{for(const x of [{publishedAt:'2026-08-01T00:00:00Z'},{publishedAt:null}]){const a=importApproved(base,[candidate(x)]);assert.equal(a.updated.length,0);assert.equal(a.catalog.channels[0].key,'old');assert.equal(a.conflicts.length,1)}});
+test('legacy undated catalog key is preserved until dated baseline is established',()=>{const b=structuredClone(base);delete b.channels[0].publishedAt;const a=importApproved(b,[candidate()]);assert.equal(a.updated.length,0);assert.equal(a.conflicts[0].reason,'unverified-chronology')});
+test('unverified official status or conflicts block rotation',()=>{for(const x of [{officialSourceVerified:false},{conflict:true},{state:'REVIEWED'}]){const a=importApproved(base,[candidate(x)]);assert.equal(a.updated.length,0)}});
+test('approved independent quorum can rotate a newer key',()=>{const a=importApproved(base,[candidate({approvalBasis:'INDEPENDENT_QUORUM',sourceCount:3,required:3,independentDomains:3,officialSourceVerified:false})]);assert.equal(a.updated.length,1)});
+test('insufficient independent quorum cannot rotate',()=>{const a=importApproved(base,[candidate({approvalBasis:'INDEPENDENT_QUORUM',sourceCount:2,required:3,independentDomains:3})]);assert.equal(a.updated.length,0)});
