@@ -63,3 +63,16 @@ test('structural marker without decodable link never approves a channel',async()
  assert.equal(r.pages[0].channelCard,true);
  assert.equal(r.pages[0].channelLinks,1);
 });
+
+test('Meshtastic links accept query parameters and uppercase E endpoint',()=>{
+ const {importLinks}=require('./public-discovery');
+ const sample='CjYSIA0mJI8VCEV3g4zY3NciCp6hWOZJbsCW9xxydModBCeJGgpTT1MtUHVnbGlhKAEwAToCCCASGAgBEAQY-gEgCygFOANABUgBUBtoAcgGAQ';
+ const plain=importLinks('https://meshtastic.org/e/#'+sample);
+ const query=importLinks('<a href="https://meshtastic.org/e/?add=true#'+sample+'">Canale</a>');
+ const upper=importLinks('<a id="region-channel-link" href="https://meshtastic.org/E/#'+sample+'">Canale</a>');
+ assert.equal(query.length,1);
+ assert.equal(upper.length,1);
+ assert.equal(query[0].name,'SOS-Puglia');
+ assert.equal(query[0].key,upper[0].key);
+ assert.equal(plain[0].key,query[0].key);
+});
