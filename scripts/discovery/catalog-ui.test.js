@@ -32,8 +32,8 @@ test('inline SINGLE and MULTI scripts parse as JavaScript',()=>{
 
 test('LoRa selector follows PRIMARY immediately, independently of SECONDARY',()=>{
  const script=inlineJs(multi);
- assert.match(script,/const primary=slots\.querySelector\('\.slot \.community'\)\?\.value/);
- assert.match(script,/communityProfiles\.filter\(p=>p\.community===primary\)/);
+ assert.match(script,/const available=communityProfiles;/);
+ assert.doesNotMatch(script,/communityProfiles\.filter\(p=>p\.community===primary\)/);
  assert.match(script,/community\.onchange=\(\)=>\{[^}]*updateLoraProfiles\(\);generate\(\)/);
  assert.doesNotMatch(script,/const selected=new Set\(\[\.\.\.slots\.querySelectorAll\('\.community'\)/);
 });
@@ -46,5 +46,5 @@ test('choosing a LoRa profile includes it in QR and URL, including after adding 
  assert.match(script,/const url='https:\/\/meshtastic\.org\/e\/#'\+toBase64Url\(payload\)/);
  assert.match(script,/if\(count<8\)\{count\+\+;draw\(\)\}/);
  assert.match(script,/picker\.value=available\.some\(p=>p\.id===old\)\?old:''/);
- assert.match(script,/if\(old&&!picker\.value\)\{/);
+ assert.match(script,/picker\.value=available\.some\(p=>p\.id===old\)\?old:''/);
 });

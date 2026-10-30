@@ -29,6 +29,7 @@ function parse(raw) {
   return {action,s};
 }
 function start(ci) { const s=state(ci);return screen(s,'communities') }
+function startSelected(ci) { const s=state(ci);return screen(s,'choose') }
 function screen(s,stage) {
   const community=catalog.communities[s.ci], chosen=s.ids.map((id,i)=>'CH'+i+' · '+catalog.communities.find(c=>c.id===catalog.channels[id].community).name+' / '+catalog.channels[id].name);
   const summary='QRMesh · MULTI Meshtastic\n'+(chosen.length?chosen.join('\n'):'Nessun canale selezionato');
@@ -47,6 +48,10 @@ function screen(s,stage) {
   } else if(stage==='lora') {
     text+='\n\nVuoi includere la configurazione LoRa nel QR?';
     rows.push(row('📡 Sì, configura LoRa',cb('lora',s)),row('➡️ No, genera QR',cb('send',s)));
+  } else if(stage==='lora-options'){
+    text+='\n\nScegli una configurazione LoRa:';
+    rows.push(row('✏️ Personalizzata',cb('custom',s)));
+    (catalog.loraProfiles||[]).forEach((p,i)=>{if(p.verified===true&&p.lora&&Number.isInteger(p.lora.region)&&Number.isInteger(p.lora.modemPreset))rows.push(row((catalog.communities.find(c=>c.id===p.community)?.name||p.community)+' · '+(p.label||'LoRa'),cb('v'+i,s)))});
   } else if(stage==='firmware'){
     text+='\n\nSeleziona il firmware:';
     FW.forEach((name,i)=>rows.push(row(name,cb('f'+i,s))));
@@ -98,7 +103,9 @@ function next(raw){
   }
   if(!s.ids.length)throw Error('Seleziona almeno un canale');
   if(action==='finish')return screen(s,'lora');
-  if(action==='lora')return screen(s,'firmware');
+  if(action==='lora')return screen(s,'lora-options');
+  if(action==='custom')return screen(s,'firmware');
+  if(/^v\d+$/.test(action)){const i=Number(action.slice(1));const p=(catalog.loraProfiles||[])[i];if(!p||p.verified!==true||!p.lora)throw Error('Profilo LoRa non disponibile');const l=p.lora;const region=Object.keys(REGION_IDS).find(k=>REGION_IDS[k]===l.region);if(!region||!allowedRegions(0).includes(region)||!allowedPresets(0,region).some(k=>PRESET_IDS[k]===l.modemPreset)||!Number.isInteger(l.txPower??0)||(l.txPower??0)<0||(l.txPower??0)>30)throw Error('Profilo LoRa incompatibile');s.fw=0;s.region=l.region;s.preset=l.modemPreset;s.power=l.txPower??0;return screen(s,'confirm')}
   if(/^f[0-3]$/.test(action)){s.fw=Number(action.slice(1));s.region=0;s.preset=-1;s.power=0;return screen(s,'region')}
   if(/^r\d+$/.test(action)){
     const region=Number(action.slice(1));
@@ -118,4 +125,4 @@ function next(raw){
   if(action==='send')return {url:createUrl(s),caption:'QRMesh MULTI · '+'Meshtastic'+'\n'+s.ids.map((i,n)=>'CH'+n+': '+catalog.communities.find(c=>c.id===catalog.channels[i].community).name+' / '+catalog.channels[i].name).join('\n')+'\nVerifica la configurazione nell’app Meshtastic prima dell’uso.'};
   throw Error('Comando non riconosciuto');
 }
-module.exports={start,next,createUrl,parse};
+module.exports={start,startSelected,next,createUrl,parse};
