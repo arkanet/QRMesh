@@ -18,3 +18,20 @@ test('verified community official source approves one technically valid channel 
 test('same lone candidate from unreferenced or external site stays pending',()=>{const base={protocol:'meshtastic',community:'unknown',name:'Unique',keyFingerprint:'fp',key:'AQ==',sourceUrl:'https://unknown.example.org/channels'};assert.notEqual(reconcile([base])[0].state,'APPROVED');assert.notEqual(reconcile([{...base,community:'known',directoryAttested:true,communityVerified:true,officialSource:false}])[0].state,'APPROVED')});
 test('conflicting keys on verified community site block automatic approval',()=>{const base={protocol:'meshtastic',community:'known',name:'Unique',keyFingerprint:'one',key:'AQ==',sourceUrl:'https://known.example.org/channels',directoryAttested:true,communityVerified:true,officialSource:true};const r=reconcile([base,{...base,keyFingerprint:'two'}]);assert.notEqual(r[0].state,'APPROVED');assert.equal(r[0].conflict,true)});
 test('registered community seeds retain authoritative domain and community identity',()=>{const {registeredSeeds}=require('./public-discovery');const s=registeredSeeds([{id:'alpha',protocol:'meshtastic',resources:[{url:'https://alpha.example.org/'},{url:'https://t.me/alpha'}]}]);assert.equal(s.length,1);assert.equal(s[0].community,'alpha');assert.equal(s[0].officialDomain,'alpha.example.org')});
+
+test('published regional links are discovered under the verified community',async()=>{
+ const {regionalLinks}=require('./public-discovery');
+ const html='<h3>Regioni pubbliche</h3><ul><li>Abruzzo — rete pilota</li><li>Puglia — rete regionale in attivazione</li></ul><p>Le altre regioni sono predisposte per l’attivazione progressiva.</p>';
+ assert.deepEqual(regionalLinks(html,'https://sos-italia.net/rete/').map(x=>x.url),['https://sos-italia.net/rete/abruzzo/','https://sos-italia.net/rete/puglia/']);
+ assert.deepEqual(regionalLinks(html,'https://unrelated.example.net/about/'),[]);
+});
+test('regional page retains verified community identity and imports a real channel when decoded',async()=>{
+ const {research}=require('./public-discovery');
+ const html='<h3>Regioni pubbliche</h3><p>Abruzzo — rete pilota.</p><p>Le altre regioni saranno attivate.</p>';
+ const urls=[];
+ const fetchPage=async url=>{urls.push(url);return {ok:true,headers:new Map([['content-type','text/html']]),text:async()=>url.endsWith('/rete/')?html:'<h1>Canale SOS-Abruzzo</h1>'}};
+ const seeds=[{url:'https://sos-italia.net/rete/',protocol:'meshtastic',community:'sositalia',kind:'registered-community',communityVerified:true,directoryAttested:true,officialDomain:'sos-italia.net'}];
+ const result=await research(cfg,{fetchPage,seeds});
+ assert.ok(urls.includes('https://sos-italia.net/rete/abruzzo/'));
+ assert.equal(result.summary.approved,0);
+});
