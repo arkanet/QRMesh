@@ -18,3 +18,95 @@ test('verified community official source approves one technically valid channel 
 test('same lone candidate from unreferenced or external site stays pending',()=>{const base={protocol:'meshtastic',community:'unknown',name:'Unique',keyFingerprint:'fp',key:'AQ==',sourceUrl:'https://unknown.example.org/channels'};assert.notEqual(reconcile([base])[0].state,'APPROVED');assert.notEqual(reconcile([{...base,community:'known',directoryAttested:true,communityVerified:true,officialSource:false}])[0].state,'APPROVED')});
 test('conflicting keys on verified community site block automatic approval',()=>{const base={protocol:'meshtastic',community:'known',name:'Unique',keyFingerprint:'one',key:'AQ==',sourceUrl:'https://known.example.org/channels',directoryAttested:true,communityVerified:true,officialSource:true};const r=reconcile([base,{...base,keyFingerprint:'two'}]);assert.notEqual(r[0].state,'APPROVED');assert.equal(r[0].conflict,true)});
 test('registered community seeds retain authoritative domain and community identity',()=>{const {registeredSeeds}=require('./public-discovery');const s=registeredSeeds([{id:'alpha',protocol:'meshtastic',resources:[{url:'https://alpha.example.org/'},{url:'https://t.me/alpha'}]}]);assert.equal(s.length,1);assert.equal(s[0].community,'alpha');assert.equal(s[0].officialDomain,'alpha.example.org')});
+
+test('published regional links are discovered under the verified community',async()=>{
+ const {regionalLinks}=require('./public-discovery');
+ const html='<h3>Regioni pubbliche</h3><ul><li>Abruzzo — rete pilota</li><li>Puglia — rete regionale in attivazione</li></ul><p>Le altre regioni sono predisposte per l’attivazione progressiva.</p>';
+ const links=regionalLinks(html,'https://sos-italia.net/rete/');assert.equal(links.length,20);assert.ok(links.some(x=>x.url==='https://sos-italia.net/rete/abruzzo/'));assert.ok(links.some(x=>x.url==='https://sos-italia.net/rete/puglia/'));
+ assert.deepEqual(regionalLinks(html,'https://unrelated.example.net/about/'),[]);
+});
+test('regional page retains verified community identity and imports a real channel when decoded',async()=>{
+ const {research}=require('./public-discovery');
+ const html='<h3>Regioni pubbliche</h3><p>Abruzzo — rete pilota.</p><p>Le altre regioni saranno attivate.</p>';
+ const urls=[];
+ const fetchPage=async url=>{urls.push(url);return {ok:true,headers:new Map([['content-type','text/html']]),text:async()=>url.endsWith('/rete/')?html:'<h1>Canale SOS-Abruzzo</h1>'}};
+ const seeds=[{url:'https://sos-italia.net/rete/',protocol:'meshtastic',community:'sositalia',kind:'registered-community',communityVerified:true,directoryAttested:true,officialDomain:'sos-italia.net'}];
+ const result=await research(cfg,{fetchPage,seeds});
+ assert.ok(urls.includes('https://sos-italia.net/rete/abruzzo/'));
+ assert.equal(result.summary.approved,0);
+});
+
+test('dynamic regional probes inspect hidden sublevels without treating 404 as valid',async()=>{
+ const html='<h2>Reti regionali</h2><p>La mappa carica lo stato regioni dal database centrale.</p>';
+ const seen=[];
+ const seeds=[{url:'https://community.example.org/network/',protocol:'meshtastic',community:'demo',kind:'registered-community',communityVerified:true,directoryAttested:true,officialDomain:'community.example.org'}];
+ const fetchPage=async url=>{seen.push(url);return {ok:!url.endsWith('/molise/'),status:404,headers:new Map([['content-type','text/html']]),text:async()=>html}};
+ const r=await research({...cfg,maxPages:50},{seeds,fetchPage});
+ assert.ok(seen.includes('https://community.example.org/network/lazio/'));
+ assert.ok(seen.includes('https://community.example.org/network/molise/'));
+ assert.equal(r.summary.approved,0);
+ assert.ok(r.errors.some(e=>e.url.endsWith('/molise/')));
+});
+
+test('regional channel selectors identify card and both link types',()=>{
+ const {structuredChannelLinks}=require('./public-discovery');
+ const html='<section class="mesh-qr-card"><a id="region-channel-link" href="https://meshtastic.org/e/#Abcd123456789">QR</a><a class="region-channel-text-link" href="https://meshtastic.org/e/#Abcd123456789">Apri</a></section>';
+ const r=structuredChannelLinks(html);
+ assert.equal(r.card,true);
+ assert.deepEqual(r.links,['https://meshtastic.org/e/#Abcd123456789']);
+});
+test('structural marker without decodable link never approves a channel',async()=>{
+ const seeds=[{url:'https://community.example.org/network/',protocol:'meshtastic',community:'c',kind:'registered-community',communityVerified:true,officialDomain:'community.example.org',directoryAttested:true}];
+ const fetchPage=async()=>({ok:true,headers:new Map([['content-type','text/html']]),text:async()=>'<div class="mesh-qr-card"><a class="region-channel-link" href="#">Open</a></div>'});
+ const r=await research({...cfg,maxPages:1},{seeds,fetchPage});
+ assert.equal(r.summary.approved,0);
+ assert.equal(r.pages[0].channelCard,true);
+ assert.equal(r.pages[0].channelLinks,1);
+});
+
+test('Meshtastic links accept query parameters and uppercase E endpoint',()=>{
+ const {importLinks}=require('./public-discovery');
+ const sample='CjYSIA0mJI8VCEV3g4zY3NciCp6hWOZJbsCW9xxydModBCeJGgpTT1MtUHVnbGlhKAEwAToCCCASGAgBEAQY-gEgCygFOANABUgBUBtoAcgGAQ';
+ const plain=importLinks('https://meshtastic.org/e/#'+sample);
+ const query=importLinks('<a href="https://meshtastic.org/e/?add=true#'+sample+'">Canale</a>');
+ const upper=importLinks('<a id="region-channel-link" href="https://meshtastic.org/E/#'+sample+'">Canale</a>');
+ assert.equal(query.length,1);
+ assert.equal(upper.length,1);
+ assert.equal(query[0].name,'SOS-Puglia');
+ assert.equal(query[0].key,upper[0].key);
+ assert.equal(plain[0].key,query[0].key);
+});
+
+test('LoRa profile in valid community link is extracted and imported as unverified without duplicates',()=>{
+ const {importLinks}=require('./public-discovery'),{importApproved}=require('./catalog-import');
+ const sample='CjYSIA0mJI8VCEV3g4zY3NciCp6hWOZJbsCW9xxydModBCeJGgpTT1MtUHVnbGlhKAEwAToCCCASGAgBEAQY-gEgCygFOANABUgBUBtoAcgGAQ';
+ const found=importLinks('https://meshtastic.org/e/?add=true#'+sample);
+ assert.equal(found.length,1);
+ assert.ok(found[0].lora);
+ const original={communities:[{id:'official',name:'Official',protocol:'meshtastic'}],channels:[]};
+ const candidate={...found[0],state:'APPROVED',community:'official',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',communityVerified:true,officialSourceVerified:true,sourceUrls:['https://official.example.org/rete/']};
+ const one=importApproved(original,[candidate]);
+ assert.equal(one.profilesAdded.length,1);
+ assert.equal(one.catalog.loraProfiles[0].verified,true);
+ const two=importApproved(one.catalog,[candidate]);
+ assert.equal(two.profilesAdded.length,0);
+ assert.deepEqual(two.catalog,one.catalog);
+});
+test('conflicting LoRa data is not silently promoted as profile',()=>{
+ const {importApproved}=require('./catalog-import');
+ const original={communities:[{id:'official',protocol:'meshtastic'}],channels:[]};
+ const result=importApproved(original,[{state:'APPROVED',community:'official',protocol:'meshtastic',name:'Channel',key:'AQ==',lora:{modemPreset:4,region:3},loraConflict:true}]);
+ assert.equal(result.profilesAdded.length,0);
+});
+
+test('official community radio configuration is technically validated and conflicting data excluded',()=>{
+ const {importApproved}=require('./catalog-import');
+ const base={communities:[{id:'official',name:'Official',protocol:'meshtastic'}],channels:[]};
+ const make=(lora,changes={})=>({protocol:'meshtastic',state:'APPROVED',community:'official',name:'Radio',key:'AQ==',lora,approvalBasis:'VERIFIED_COMMUNITY_SOURCE',communityVerified:true,officialSourceVerified:true,sourceUrls:['https://official.example.org/'],...changes});
+ const good=importApproved(base,[make({region:3,modemPreset:4,txPower:20})]);
+ assert.equal(good.catalog.loraProfiles[0].verified,true);
+ assert.equal(good.catalog.loraProfiles[0].verification,'validated-community-source');
+ for(const lora of [{region:0,modemPreset:4},{region:3,modemPreset:-1},{region:3,modemPreset:4,txPower:200}])
+  assert.equal(importApproved(base,[make(lora)]).profilesAdded.length,0);
+ assert.equal(importApproved(base,[make({region:3,modemPreset:4},{loraConflict:true})]).profilesAdded.length,0);
+});
