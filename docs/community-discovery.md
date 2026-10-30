@@ -1,21 +1,20 @@
-# Community Discovery — stato sperimentale
+# QRMesh Public Discovery — automatic, no admin backend
 
-## Sicurezza
-Il workflow non pubblica modifiche automaticamente, salvo impostare esplicitamente la variabile di repository `COMMUNITY_DISCOVERY_AUTOPUBLISH=true`. **Non abilitarla** finché autenticità e test non siano completi.
+## Where it searches
+The initial crawl starts from the official Meshtastic local-group directory, publicly available MeshCore channel pages, and public Bing RSS search results. No account, API token, login or private group access is required. Search RSS availability is best-effort: providers may throttle or change endpoints; a failed provider is reported rather than bypassed.
 
-Lo scanner visita solo pagine HTTPS già elencate nel catalogo; non scopre nuove community, non ricerca social e non legge QR contenuti soltanto in immagini. I link import Meshtastic presenti nelle pagine vengono decodificati, ma una fonte registrata non è automaticamente una fonte autenticata. I profili LoRa riportano solo campi presenti nel payload.
+## SEO-like queries and relevance
+Search queries: `meshtastic community channels qr`, `meshtastic local mesh group channel PSK`, `meshcore community channels key`, `meshcore network join channels`.
+The scoring vocabulary is in `data/discovery-config.json`, split into protocol, community and channel terms. Terms such as `mesh`, `network`, `community`, `regional`, `canali`, `channel`, `psk`, `qr code`, `join`, and `channelset` help rank links. No community-specific keyword (including SOS-Italia) is required.
 
-## Test
-- `node --test scripts/discovery/*.test.js`
-- `node --check scripts/discovery/nightly.js`
-- `node scripts/discovery/nightly.js` (accesso rete richiesto; modifica la copia locale di catalogo e report)
-- CI: `.github/workflows/community-discovery-tests.yml`
+The crawler follows ranked links up to 5 levels, bounded by a global 80-page budget and per-domain limits. Search snippets are discovery hints only and **never** qualify as independent verification.
 
-La schedulazione usa due cron UTC con filtro `TZ=Europe/Rome` per mirare alle 03:00 locali, compreso il cambio ora. GitHub Actions può ritardare le esecuzioni. **I workflow schedule girano solo sul branch predefinito**, quindi sul branch sperimentale serve avvio manuale o esecuzione locale.
+## Automatic verification and publication
+The pipeline collects publicly displayed Meshtastic channel import links and supported public MeshCore channel text, validates extracted keys, and deduplicates evidence by canonical domain. Three independently hosted matching observations, at least 75% agreement, no conflicting keys, and an official Meshtastic directory-attested association are required for automatic approval. Generic default channels and public/default PSKs cannot be auto-approved through this path. Evidence from an unauthenticated search result alone cannot attest a community's identity.
 
-## Gate prima di integrare
-1. Verifica titolarità delle fonti e prova di provenienza delle chiavi.
-2. Test decoder con payload reali, QR immagine e casi limite.
-3. Gestione duplicati, rotazioni PSK, conflitti LoRa e audit.
-4. Discovery di community nuove tramite fonti/API pubbliche autorizzate.
-5. Test end-to-end del MULTI e primo import in ambiente di prova.
+Only approved candidates can be written by `scripts/discovery/nightly.js` to `data/catalog.json`; reports redact unapproved PSKs. Updates are committed by the nightly workflow when running on the default branch, or through a manual dispatch where supported. GitHub scheduled workflows do **not** execute on a non-default development branch, so automatic overnight runs will remain dormant until the tested workflow is merged.
+
+If the safety threshold is never met, **zero channels are approved**: this is correct, not a failed search. There is no admin panel and no manual review queue. The audit report is a CI artifact. The user-facing SINGOLO/MULTI selectors list only communities with approved catalog channels. Existing catalog entries are preserved.
+
+## Tests
+`node --test scripts/discovery/*.test.js` and the branch CI's `live-audit` run automatic checks. No private Telegram/Facebook/Discord content or authenticated APIs are accessed. MeshCore structured community directories are potential future seed sources where their schema can be validated.
