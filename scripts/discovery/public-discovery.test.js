@@ -76,3 +76,25 @@ test('Meshtastic links accept query parameters and uppercase E endpoint',()=>{
  assert.equal(query[0].key,upper[0].key);
  assert.equal(plain[0].key,query[0].key);
 });
+
+test('LoRa profile in valid community link is extracted and imported as unverified without duplicates',()=>{
+ const {importLinks}=require('./public-discovery'),{importApproved}=require('./catalog-import');
+ const sample='CjYSIA0mJI8VCEV3g4zY3NciCp6hWOZJbsCW9xxydModBCeJGgpTT1MtUHVnbGlhKAEwAToCCCASGAgBEAQY-gEgCygFOANABUgBUBtoAcgGAQ';
+ const found=importLinks('https://meshtastic.org/e/?add=true#'+sample);
+ assert.equal(found.length,1);
+ assert.ok(found[0].lora);
+ const original={communities:[{id:'official',name:'Official',protocol:'meshtastic'}],channels:[]};
+ const candidate={...found[0],state:'APPROVED',community:'official',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',sourceUrls:['https://official.example.org/rete/']};
+ const one=importApproved(original,[candidate]);
+ assert.equal(one.profilesAdded.length,1);
+ assert.equal(one.catalog.loraProfiles[0].verified,false);
+ const two=importApproved(one.catalog,[candidate]);
+ assert.equal(two.profilesAdded.length,0);
+ assert.deepEqual(two.catalog,one.catalog);
+});
+test('conflicting LoRa data is not silently promoted as profile',()=>{
+ const {importApproved}=require('./catalog-import');
+ const original={communities:[{id:'official',protocol:'meshtastic'}],channels:[]};
+ const result=importApproved(original,[{state:'APPROVED',community:'official',protocol:'meshtastic',name:'Channel',key:'AQ==',lora:{modemPreset:4,region:3},loraConflict:true}]);
+ assert.equal(result.profilesAdded.length,0);
+});

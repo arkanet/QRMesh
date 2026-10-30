@@ -13,7 +13,7 @@ async function main(){
  const second=importApproved(first.catalog,scan.candidates);
  assert.equal(second.added.length,0,'second import must add zero channels');
  assert.equal(second.updated.length,0,'second import must update zero channels');
- assert.deepEqual(second.catalog,first.catalog,'second import must preserve catalog');
+ assert.deepEqual(second.catalog,first.catalog,'second import must preserve catalog');assert.equal(second.profilesAdded.length,0,'second import must not duplicate LoRa profiles');
  assert.ok(first.catalog.channels.length>=catalog.channels.length,'catalog must not shrink');
  assert.equal(first.catalog.channels.length,catalog.channels.length+first.added.length,'each added channel must have exactly one record');
  const ids=new Set(first.catalog.communities.map(c=>c.id));
@@ -25,7 +25,7 @@ async function main(){
  const now=new Date().toISOString();const state=observe({},catalog,scan.candidates,now);
  const after=importApproved(catalog,state.candidates);
  assert.equal(after.updated.length,0,'unknown historical keys must not be replaced on first scan');
- const report={before:catalog.channels.length,after:first.catalog.channels.length,added:first.added,updated:first.updated,conflicts:first.conflicts,approved:approved.length,pages:scan.summary.pages,candidates:scan.candidates.length,secondImport:{added:second.added.length,updated:second.updated.length,unchanged:true},firstObservation:{rotations:after.updated.length}};
+ const report={before:catalog.channels.length,after:first.catalog.channels.length,added:first.added,updated:first.updated,conflicts:first.conflicts,approved:approved.length,profilesAdded:first.profilesAdded,secondProfilesAdded:second.profilesAdded.length,pages:scan.summary.pages,candidates:scan.candidates.length,secondImport:{added:second.added.length,updated:second.updated.length,unchanged:true},firstObservation:{rotations:after.updated.length}};
  fs.mkdirSync('audit-output',{recursive:true});fs.writeFileSync('audit-output/prepublish.json',JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report));
 }

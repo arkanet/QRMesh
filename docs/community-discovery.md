@@ -22,6 +22,8 @@ I canali validi pubblicati sul dominio ufficiale di una community referenziata v
 
 Una PSK esistente viene aggiornata solo quando la nuova chiave è approvata, presenta una data verificabile più recente oppure viene osservata in almeno due scansioni successive alla chiave precedente già osservata dalla stessa fonte autorevole e non esistono conflitti. Ogni sostituzione conserva la chiave precedente in `keyHistory`. I canali senza cronologia verificabile mantengono la chiave corrente.
 
+I profili LoRa presenti nei link validi vengono estratti separatamente; quelli completi (regione e preset) sono registrati come non verificati, senza sovrascrivere configurazioni radio esistenti. I profili discordanti non vengono importati.
+
 Solo i canali approvati sono importati in `data/catalog.json`; le community prive di canali non compaiono nei selettori.
 
 ## Esecuzione
