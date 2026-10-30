@@ -26,7 +26,7 @@ test('wizard configures LoRa and includes it in ChannelSet',()=>{
   const selected=multi.next(choice.callback_data);
   const finish=selected.reply_markup.inline_keyboard.flat().find(b=>b.callback_data.includes(':finish:'));
   let screen=multi.next(finish.callback_data);
-  for(const action of ['lora','f0','r3','p4','w0']){
+  for(const action of ['lora','custom','f0','r3','p4','w0']){
     const b=screen.reply_markup.inline_keyboard.flat().find(x=>x.callback_data.startsWith('m:'+action+':'));
     assert.ok(b,'missing '+action);
     screen=multi.next(b.callback_data);
