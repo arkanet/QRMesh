@@ -3,6 +3,8 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs');
 const {importApproved}=require('./catalog-import');
 const original=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));
+// Keep the import fixture independent of channels already added to the live catalog.
+original.channels=original.channels.filter(c=>c.community!=='sositalia');
 function candidate(extra={}){return {state:'APPROVED',community:'sositalia',protocol:'meshtastic',name:'SOS-Italia',key:'AQ==',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',sourceUrls:['https://sos-italia.net/rete/'],...extra}}
 test('approved channel from catalog community appears in shared catalog without duplicates',()=>{const first=importApproved(original,[candidate()]);assert.equal(first.added.length,1);assert.equal(first.catalog.channels.filter(x=>x.community==='sositalia').length,1);const second=importApproved(first.catalog,[candidate()]);assert.equal(second.added.length,0);assert.deepEqual(second.catalog,first.catalog)});
 test('unapproved or isolated candidates never appear in SINGLE/MULTI catalog',()=>{const r=importApproved(original,[candidate({state:'DISCOVERED'}),candidate({community:'isolated',approvalBasis:'INDEPENDENT_QUORUM',communityVerified:false})]);assert.equal(r.added.length,0);assert.deepEqual(r.catalog,original)});
