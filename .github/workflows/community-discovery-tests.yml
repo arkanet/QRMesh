@@ -18,6 +18,9 @@ jobs:
       - run: node --test scripts/discovery/*.test.js
       - run: node --check scripts/discovery/nightly.js
       - run: node --check scripts/discovery/scanner.js
+      - run: node --check scripts/discovery/source-review.js
+      - run: node --check scripts/discovery/audit-gate.js
+      - run: node --check scripts/discovery/audit.js
       - run: node --check scripts/discovery/meshtastic-link.js
   live-audit:
     runs-on: ubuntu-latest
