@@ -17,7 +17,7 @@ function excludedPage(raw){try{const u=new URL(raw);return /(?:^|\/)(?:login|sig
 const ITALIAN_REGIONS=['abruzzo','basilicata','calabria','campania','emilia-romagna','friuli-venezia-giulia','lazio','liguria','lombardia','marche','molise','piemonte','puglia','sardegna','sicilia','toscana','trentino-alto-adige','umbria','valle-d-aosta','veneto'];
 function regionalLinks(html,base){
  const u=new URL(base);
- const title=strip(html.replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi,' ').replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi,' ')).toLowerCase();
+ const title=strip(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ')).toLowerCase();
  if(!/(?:rete|network|region|territor)/i.test(u.pathname)||!/(?:regioni|regional|territorial)/i.test(title))return [];
  const discovered=new Map();
  const add=(url,label)=>{try{const parsed=new URL(url,u);if(site(parsed.href)!==site(u.href)||!parsed.pathname.startsWith(u.pathname)||parsed.pathname===u.pathname||excludedPage(parsed.href))return;discovered.set(parsed.href,{url:parsed.href,label})}catch{}};
