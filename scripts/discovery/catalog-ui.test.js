@@ -10,7 +10,7 @@ function inlineJs(html){const parts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\
 test('SINGLE and MULTI share the same catalog source',()=>{
   assert.match(single,/fetch\('\.\/data\/catalog\.json'/);
   assert.match(multi,/fetch\('\.\/data\/catalog\.json'/);
-  assert.match(single,/communityDirectory=data\.communities/);
+  assert.match(single,/communityDirectory=\(data\.communities/);
   assert.match(multi,/communities=data\.communities/);
   assert.doesNotMatch(single,/const loraKey=/);
 });
