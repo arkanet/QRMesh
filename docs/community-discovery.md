@@ -16,7 +16,7 @@ Modificare `data/discovery-config.json`:
 
 I canali validi pubblicati sul dominio ufficiale di una community referenziata vengono approvati in assenza di chiavi discordanti. I canali esterni richiedono un'identità di community attestata e il quorum previsto. Un risultato di ricerca non costituisce attestazione.
 
-Una PSK esistente viene aggiornata solo quando la nuova chiave è approvata, ha una data di pubblicazione verificabile successiva alla data registrata per la chiave corrente e non esistono conflitti. Ogni sostituzione conserva la chiave precedente in `keyHistory`. I canali senza cronologia verificabile mantengono la chiave corrente.
+Una PSK esistente viene aggiornata solo quando la nuova chiave è approvata, presenta una data verificabile più recente oppure viene osservata in almeno due scansioni successive alla chiave precedente già osservata dalla stessa fonte autorevole e non esistono conflitti. Ogni sostituzione conserva la chiave precedente in `keyHistory`. I canali senza cronologia verificabile mantengono la chiave corrente.
 
 Solo i canali approvati sono importati in `data/catalog.json`; le community prive di canali non compaiono nei selettori.
 
