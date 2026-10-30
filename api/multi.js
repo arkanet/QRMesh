@@ -29,6 +29,7 @@ function parse(raw) {
   return {action,s};
 }
 function start(ci) { const s=state(ci);return screen(s,'communities') }
+function startSelected(ci) { const s=state(ci);return screen(s,'choose') }
 function screen(s,stage) {
   const community=catalog.communities[s.ci], chosen=s.ids.map((id,i)=>'CH'+i+' · '+catalog.communities.find(c=>c.id===catalog.channels[id].community).name+' / '+catalog.channels[id].name);
   const summary='QRMesh · MULTI Meshtastic\n'+(chosen.length?chosen.join('\n'):'Nessun canale selezionato');
@@ -124,4 +125,4 @@ function next(raw){
   if(action==='send')return {url:createUrl(s),caption:'QRMesh MULTI · '+'Meshtastic'+'\n'+s.ids.map((i,n)=>'CH'+n+': '+catalog.communities.find(c=>c.id===catalog.channels[i].community).name+' / '+catalog.channels[i].name).join('\n')+'\nVerifica la configurazione nell’app Meshtastic prima dell’uso.'};
   throw Error('Comando non riconosciuto');
 }
-module.exports={start,next,createUrl,parse};
+module.exports={start,startSelected,next,createUrl,parse};

@@ -100,7 +100,7 @@ async function handle(update, token) {
     const [purpose,id]=data.split(':');const c=catalog.communities.find(x=>x.id===id);if(!c)return;
     await send(chat,'Seleziona un canale di '+c.name+':',token,channelKeyboard(id,0,purpose==='linkpick'?'link':'qr'));return;
   }
-  if (data.startsWith('multi:')) { const ci=Number(data.slice(6));if(!Number.isSafeInteger(ci)||!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic')return;const result=multi.start(ci);await send(chat,result.text,token,result.reply_markup);return; }
+  if (data.startsWith('multi:')) { const ci=Number(data.slice(6));if(!Number.isSafeInteger(ci)||!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic')return;const result=multi.startSelected(ci);await send(chat,result.text,token,result.reply_markup);return; }
   if (data.startsWith('m:')) { try {const result=multi.next(data);if(result.url)await photo(chat,result.caption+'\n'+result.url,result.url,token);else await send(chat,result.text,token,result.reply_markup);}catch(error){await send(chat,'Configurazione non valida: '+error.message+'\nRiparti dalla community con /start.',token);}return; }
   if (data.startsWith('single:')) { const id=data.slice(7);const c=catalog.communities.find(x=>x.id===id);if(c)await send(chat,'Canali di '+c.name+' — seleziona un canale:',token,channelKeyboard(id,0));return; }
   if (data.startsWith('c:') || data.startsWith('p:')) {

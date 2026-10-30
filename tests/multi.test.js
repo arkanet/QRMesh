@@ -83,3 +83,10 @@ test('verified LoRa profiles from any community can be selected in MULTI',()=>{
  assert.ok(decoded.lora);
  assert.equal(decoded.lora.region,profiles[0].lora.region);
 });
+
+test('choosing MULTI community opens CH0 channels directly, without duplicate community selection',()=>{
+ const start=multi.startSelected(ci);
+ assert.match(start.text,/CH0/);
+ assert.ok(start.reply_markup.inline_keyboard.flat().some(b=>b.callback_data.startsWith('m:a')));
+ assert.equal(start.reply_markup.inline_keyboard.flat().some(b=>b.callback_data.startsWith('m:c')),false);
+});
