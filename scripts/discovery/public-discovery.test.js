@@ -22,7 +22,7 @@ test('registered community seeds retain authoritative domain and community ident
 test('published regional links are discovered under the verified community',async()=>{
  const {regionalLinks}=require('./public-discovery');
  const html='<h3>Regioni pubbliche</h3><ul><li>Abruzzo — rete pilota</li><li>Puglia — rete regionale in attivazione</li></ul><p>Le altre regioni sono predisposte per l’attivazione progressiva.</p>';
- assert.deepEqual(regionalLinks(html,'https://sos-italia.net/rete/').map(x=>x.url),['https://sos-italia.net/rete/abruzzo/','https://sos-italia.net/rete/puglia/']);
+ const links=regionalLinks(html,'https://sos-italia.net/rete/');assert.equal(links.length,20);assert.ok(links.some(x=>x.url==='https://sos-italia.net/rete/abruzzo/'));assert.ok(links.some(x=>x.url==='https://sos-italia.net/rete/puglia/'));
  assert.deepEqual(regionalLinks(html,'https://unrelated.example.net/about/'),[]);
 });
 test('regional page retains verified community identity and imports a real channel when decoded',async()=>{
@@ -34,4 +34,16 @@ test('regional page retains verified community identity and imports a real chann
  const result=await research(cfg,{fetchPage,seeds});
  assert.ok(urls.includes('https://sos-italia.net/rete/abruzzo/'));
  assert.equal(result.summary.approved,0);
+});
+
+test('dynamic regional probes inspect hidden sublevels without treating 404 as valid',async()=>{
+ const html='<h2>Reti regionali</h2><p>La mappa carica lo stato regioni dal database centrale.</p>';
+ const seen=[];
+ const seeds=[{url:'https://community.example.org/network/',protocol:'meshtastic',community:'demo',kind:'registered-community',communityVerified:true,directoryAttested:true,officialDomain:'community.example.org'}];
+ const fetchPage=async url=>{seen.push(url);return {ok:!url.endsWith('/molise/'),status:404,headers:new Map([['content-type','text/html']]),text:async()=>html}};
+ const r=await research({...cfg,maxPages:50},{seeds,fetchPage});
+ assert.ok(seen.includes('https://community.example.org/network/lazio/'));
+ assert.ok(seen.includes('https://community.example.org/network/molise/'));
+ assert.equal(r.summary.approved,0);
+ assert.ok(r.errors.some(e=>e.url.endsWith('/molise/')));
 });
