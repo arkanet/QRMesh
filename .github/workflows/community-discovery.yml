@@ -1,7 +1,7 @@
 name: Community discovery nightly
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 1,2 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -16,10 +16,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test scripts/discovery/*.test.js
+      - name: Only run at 03:00 Europe/Rome
+        id: clock
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(TZ=Europe/Rome date +%H)" = "03" ]; then echo 'run=true' >> "$GITHUB_OUTPUT"; fi
+      - if: steps.clock.outputs.run == 'true'
+        run: node --test scripts/discovery/*.test.js
       - name: Scan public sources and update catalog
+        if: steps.clock.outputs.run == 'true'
         run: node scripts/discovery/nightly.js
       - name: Commit verified updates
+        if: steps.clock.outputs.run == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
