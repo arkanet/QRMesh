@@ -26,7 +26,7 @@ jobs:
         if: steps.clock.outputs.run == 'true'
         run: node scripts/discovery/nightly.js
       - name: Commit verified updates
-        if: steps.clock.outputs.run == 'true' && vars.COMMUNITY_DISCOVERY_AUTOPUBLISH == 'true'
+        if: steps.clock.outputs.run == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
