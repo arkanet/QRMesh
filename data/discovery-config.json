@@ -1,0 +1,8 @@
+{
+  "keyword": "SOS-Italia",
+  "maxDepth": 5,
+  "maxPages": 80,
+  "strategy": "adaptive",
+  "maxLinksPerPage": 25,
+  "publication": "manual-review-only"
+}
