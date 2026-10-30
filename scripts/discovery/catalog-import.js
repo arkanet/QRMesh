@@ -1,5 +1,6 @@
 'use strict';
 const {canRotate}=require('./key-rotation');
+function validLora(lora){return !!lora&&Number.isInteger(lora.region)&&lora.region>0&&lora.region<=255&&Number.isInteger(lora.modemPreset)&&lora.modemPreset>=0&&lora.modemPreset<=20&&(lora.txPower===undefined||(Number.isInteger(lora.txPower)&&lora.txPower>=0&&lora.txPower<=40))}
 function importApproved(catalog,candidates){
  const next=structuredClone(catalog),added=[],updated=[],conflicts=[];const profilesAdded=[];const profiles=new Set((next.loraProfiles||[]).map(p=>JSON.stringify([p.community,p.lora])));
  const communities=new Map(next.communities.map(c=>[c.id,c]));
@@ -22,6 +23,6 @@ function importApproved(catalog,candidates){
   const channel={community:id,name:candidate.name,key:candidate.key,approved:true,verification:candidate.approvalBasis==='VERIFIED_COMMUNITY_SOURCE'?'verified-community-source':'automatic-independent-sources',sources:candidate.sourceUrls||[],...(candidate.publishedAt?{publishedAt:candidate.publishedAt}:{})};
   next.channels.push(channel);existing.set(key,channel);added.push({community:id,name:candidate.name});
  }
- for(const candidate of candidates){if(candidate.state!=='APPROVED'||candidate.loraConflict||!candidate.lora||!communities.has(candidate.community))continue;const lora=candidate.lora;if(!Number.isInteger(lora.region)||!Number.isInteger(lora.modemPreset))continue;const signature=JSON.stringify([candidate.community,lora]);if(profiles.has(signature))continue;const crypto=require('node:crypto');const id=candidate.community+'-'+crypto.createHash('sha256').update(signature).digest('hex').slice(0,16);(next.loraProfiles||=[]).push({id,community:candidate.community,label:'Configurazione LoRa pubblicata',verified:false,verification:'pending-manual-review',sourceUrl:candidate.sourceUrls?.[0]||'',lora});profiles.add(signature);profilesAdded.push({community:candidate.community,id});}return {catalog:next,added,updated,conflicts,profilesAdded};
+ for(const candidate of candidates){if(candidate.state!=='APPROVED'||candidate.loraConflict||!validLora(candidate.lora)||!communities.has(candidate.community))continue;const lora=candidate.lora;const signature=JSON.stringify([candidate.community,lora]);if(profiles.has(signature))continue;const crypto=require('node:crypto');const id=candidate.community+'-'+crypto.createHash('sha256').update(signature).digest('hex').slice(0,16);(next.loraProfiles||=[]).push({id,community:candidate.community,label:'Configurazione LoRa verificata',verified:candidate.approvalBasis==='VERIFIED_COMMUNITY_SOURCE'&&candidate.communityVerified===true&&candidate.officialSourceVerified===true,verification:candidate.approvalBasis==='VERIFIED_COMMUNITY_SOURCE'&&candidate.communityVerified===true&&candidate.officialSourceVerified===true?'validated-community-source':'independent-evidence',sourceUrl:candidate.sourceUrls?.[0]||'',lora});profiles.add(signature);profilesAdded.push({community:candidate.community,id});}return {catalog:next,added,updated,conflicts,profilesAdded};
 }
-module.exports={importApproved};
+module.exports={importApproved,validLora};
