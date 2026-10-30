@@ -1,0 +1,13 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {reviewSources,textCandidates,internalLinks}=require('./source-review');
+const v=n=>{let a=[];while(n>127){a.push((n&127)|128);n=Math.floor(n/128)}return [...a,n]};
+const f=(n,b)=>Buffer.from([...v(n*8+2),...v(b.length),...b]);
+const i=(n,x)=>Buffer.from([...v(n*8),...v(x)]);
+const link=()=>{const channel=Buffer.concat([f(2,Buffer.from([1])),f(3,Buffer.from('SOS-Italia'))]);return 'https://meshtastic.org/e/#'+Buffer.concat([f(1,channel),f(2,Buffer.concat([i(2,4),i(7,3)]))]).toString('base64url')};
+const community=[{id:'sositalia',protocol:'meshtastic',resources:[{url:'https://sos-italia.net/'}]}];
+const page=body=>({ok:true,headers:new Map([['content-type','text/html']]),text:async()=>body});
+test('same-domain internal pages discovered, foreign/insecure pages discarded',()=>{const got=internalLinks('<a href="/rete/">rete</a><a href="https://evil.test/secret">x</a><a href="http://sos-italia.net/old">old</a>', 'https://sos-italia.net/');assert.deepEqual(got,['https://sos-italia.net/rete/'])});
+test('follows official internal page to collect import link as pending review',async()=>{const fetchPage=async url=>page(url.endsWith('/rete/')?'<a href="'+link()+'">Apri in Meshtastic</a>':'<a href="/rete/">Rete</a>');const result=await reviewSources(community,{fetchPage});assert.equal(result.pages.length,2);assert.equal(result.candidates.length,1);assert.equal(result.candidates[0].name,'SOS-Italia');assert.deepEqual(result.candidates[0].lora,{modemPreset:4,region:3});assert.equal(result.candidates[0].status,'pending-review');assert.equal(result.candidates[0].key,undefined)});
+test('conservative plain name/PSK extraction and rejection of malformed keys',()=>{assert.deepEqual(textCandidates('Nome canale: TEST chiave: AQ=='),[{name:'TEST',key:'AQ=='}]);assert.equal(textCandidates('Nome canale: TEST chiave: abcdef').length,0)});
+test('does not follow links recursively beyond one hop or import foreign pages',async()=>{const calls=[];const fetchPage=async url=>{calls.push(url);return page('<a href="/next/">Next</a><a href="https://evil.test/">evil</a>')};await reviewSources(community,{fetchPage});assert.deepEqual(calls,['https://sos-italia.net/','https://sos-italia.net/next/'])});
