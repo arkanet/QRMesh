@@ -1,0 +1,5 @@
+# QRMesh Community Discovery (development)
+Nightly scan of **public first-party pages already listed** in `data/catalog.json`. No access to private social groups or general-purpose web search is implemented. New communities must be registered with trusted public resources before their channels can be auto-imported.
+A discovered Meshtastic URL is decoded and its channels/LoRa values extracted. Only URLs directly embedded on listed community pages qualify. The source is recorded for LoRa profiles; this is provenance, **not cryptographic proof of authenticity**. Verify that source URLs are genuinely controlled by community operators before enabling unattended updates.
+The workflow runs at 02:00 UTC (03:00 CET / 04:00 CEST), **not** 03:00 Rome year-round; adjust with timezone-aware scheduling when supported. GitHub scheduled runs may be delayed.
+`node --test scripts/discovery/*.test.js` checks decoder. `node scripts/discovery/nightly.js` runs discovery. Profiles only appear for selected communities in MULTI; manual customization remains available.
