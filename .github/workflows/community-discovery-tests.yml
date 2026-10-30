@@ -43,3 +43,25 @@ jobs:
           path: audit-output/
           if-no-files-found: error
           retention-days: 14
+
+  prepublish:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify real source import and idempotent reimport
+        run: node scripts/discovery/prepublish-check.js
+      - name: Save prepublication report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepublish-check
+          path: audit-output/prepublish.json
+          if-no-files-found: warn
+          retention-days: 14
