@@ -90,6 +90,21 @@
           "url": "https://bayareameshcore.com/channels/"
         }
       ]
+    },
+    {
+      "id": "sositalia",
+      "name": "SOS-Italia",
+      "protocol": "meshtastic",
+      "resources": [
+        {
+          "title": "Sito ufficiale",
+          "url": "https://sos-italia.net/"
+        },
+        {
+          "title": "Rete e canali",
+          "url": "https://sos-italia.net/rete/"
+        }
+      ]
     }
   ],
   "channels": [
