@@ -1,0 +1,699 @@
+{
+  "date": "2026-10-30T14:17:46.085Z",
+  "summary": {
+    "pages": 80,
+    "observations": 65,
+    "approved": 22
+  },
+  "added": 15,
+  "updated": [],
+  "conflicts": [],
+  "errors": [
+    {
+      "url": "https://sos-italia.net/rete/calabria/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/friuli-venezia-giulia/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/liguria/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/sardegna/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/sicilia/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/trentino-alto-adige/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://sos-italia.net/rete/valle-d-aosta/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/channels",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://meshtastic.org/E/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/abruzzo/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/basilicata/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/calabria/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/campania/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/emilia-romagna/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/friuli-venezia-giulia/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/lazio/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/liguria/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/lombardia/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/marche/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/molise/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/piemonte/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/puglia/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/sardegna/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/sicilia/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/toscana/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/trentino-alto-adige/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/umbria/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/regional-scope/valle-d-aosta/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/recommended-devices",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/companion-setup",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/repeater-setup",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/bots",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/blog",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://bayareameshcore.com/about",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://whatsapp.com/channel/0029Vb5ku40CRs1m9V1Ysa1j",
+      "error": "fetch failed"
+    }
+  ],
+  "candidates": [
+    {
+      "protocol": "meshcore",
+      "community": "meshcoreitalia.it",
+      "name": "Public",
+      "keyFingerprint": "1a45e11b73dad068",
+      "state": "DISCOVERED",
+      "approvalBasis": null,
+      "communityVerified": false,
+      "officialSourceVerified": false,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": null,
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshcoreitalia.it/canali-regionali/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "loraitalia",
+      "name": "RRP",
+      "keyFingerprint": "1cc5a0e912c0ac44",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": null,
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.loraitalia.it/wiki/canali-meshtastic/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Italia",
+      "keyFingerprint": "7b8cb164d7bd0c13",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Ita-Nord",
+      "keyFingerprint": "9e06c2b3516f2775",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Ita-Centro",
+      "keyFingerprint": "9e06c2b3516f2775",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Ita-Sud",
+      "keyFingerprint": "9e06c2b3516f2775",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Ita-Test",
+      "keyFingerprint": "9e06c2b3516f2775",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "Ita-Help",
+      "keyFingerprint": "9e06c2b3516f2775",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "meshtasticitalia",
+      "name": "RRP",
+      "keyFingerprint": "1cc5a0e912c0ac44",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshtasticitalia.it/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Italia",
+      "keyFingerprint": "2abb998be73289db",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Abruzzo",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/abruzzo/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Basil",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/basilicata/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Campan",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/campania/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-EmRom",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/emilia-romagna/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Lazio",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/lazio/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Lomb",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/lombardia/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Marche",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/marche/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Molise",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/molise/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Piem",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/piemonte/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Puglia",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/puglia/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Toscana",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/toscana/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Umbria",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/umbria/"
+      ]
+    },
+    {
+      "protocol": "meshtastic",
+      "community": "sositalia",
+      "name": "SOS-Veneto",
+      "keyFingerprint": "80e5fdcf41ce74ef",
+      "state": "APPROVED",
+      "approvalBasis": "VERIFIED_COMMUNITY_SOURCE",
+      "communityVerified": true,
+      "officialSourceVerified": true,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": {
+        "modemPreset": 4,
+        "region": 3,
+        "txPower": 27
+      },
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://sos-italia.net/rete/veneto/"
+      ]
+    },
+    {
+      "protocol": "meshcore",
+      "community": "meshcoreitalia.it",
+      "name": "Canali regionali Allerta Meteo",
+      "keyFingerprint": "37a70fa7dea5299c",
+      "state": "DISCOVERED",
+      "approvalBasis": null,
+      "communityVerified": false,
+      "officialSourceVerified": false,
+      "sourceCount": 1,
+      "required": 3,
+      "independentDomains": 1,
+      "conflict": false,
+      "lora": null,
+      "loraConflict": false,
+      "sourceUrls": [
+        "https://www.meshcoreitalia.it/canali-allerta-meteo/"
+      ]
+    }
+  ]
+}

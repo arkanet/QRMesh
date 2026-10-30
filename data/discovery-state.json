@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "entries": {
+    "[\"loraitalia\",\"rrp\"]": {
+      "fingerprint": "1cc5a0e912c0ac442009fb0909143dd9af4a88cc5b82bf579aa33579c52881f5",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"italia\"]": {
+      "fingerprint": "7b8cb164d7bd0c13292b47fab4bb24dda2af9fbac6cfeab06749eb112b768653",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"ita-nord\"]": {
+      "fingerprint": "9e06c2b3516f27753ee26a50bead0f6b8e2c8932fe254887b02da88667c9b0f3",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"ita-centro\"]": {
+      "fingerprint": "9e06c2b3516f27753ee26a50bead0f6b8e2c8932fe254887b02da88667c9b0f3",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"ita-sud\"]": {
+      "fingerprint": "9e06c2b3516f27753ee26a50bead0f6b8e2c8932fe254887b02da88667c9b0f3",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"ita-test\"]": {
+      "fingerprint": "9e06c2b3516f27753ee26a50bead0f6b8e2c8932fe254887b02da88667c9b0f3",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"ita-help\"]": {
+      "fingerprint": "9e06c2b3516f27753ee26a50bead0f6b8e2c8932fe254887b02da88667c9b0f3",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"meshtasticitalia\",\"rrp\"]": {
+      "fingerprint": "1cc5a0e912c0ac442009fb0909143dd9af4a88cc5b82bf579aa33579c52881f5",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-italia\"]": {
+      "fingerprint": "2abb998be73289db81caf221599bb1e610f862277e88f8f200015cdfcf02a103",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-abruzzo\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-basil\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-campan\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-emrom\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-lazio\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-lomb\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-marche\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-molise\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-piem\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-puglia\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-toscana\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-umbria\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    },
+    "[\"sositalia\",\"sos-veneto\"]": {
+      "fingerprint": "80e5fdcf41ce74ef89822d8e2bd3a3868d57286ec445af42c276a8d25b211487",
+      "scans": 1,
+      "firstSeenAt": "2026-10-30T14:17:46.084Z",
+      "lastSeenAt": "2026-10-30T14:17:46.084Z",
+      "previous": null
+    }
+  }
+}
