@@ -19,3 +19,24 @@ jobs:
       - run: node --check scripts/discovery/nightly.js
       - run: node --check scripts/discovery/scanner.js
       - run: node --check scripts/discovery/meshtastic-link.js
+  live-audit:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run real-source scan in isolated workspace
+        run: |
+          node scripts/discovery/audit.js
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: community-discovery-audit
+          path: audit-output/
+          if-no-files-found: error
+          retention-days: 14
