@@ -47,3 +47,19 @@ test('dynamic regional probes inspect hidden sublevels without treating 404 as v
  assert.equal(r.summary.approved,0);
  assert.ok(r.errors.some(e=>e.url.endsWith('/molise/')));
 });
+
+test('regional channel selectors identify card and both link types',()=>{
+ const {structuredChannelLinks}=require('./public-discovery');
+ const html='<section class="mesh-qr-card"><a id="region-channel-link" href="https://meshtastic.org/e/#Abcd123456789">QR</a><a class="region-channel-text-link" href="https://meshtastic.org/e/#Abcd123456789">Apri</a></section>';
+ const r=structuredChannelLinks(html);
+ assert.equal(r.card,true);
+ assert.deepEqual(r.links,['https://meshtastic.org/e/#Abcd123456789']);
+});
+test('structural marker without decodable link never approves a channel',async()=>{
+ const seeds=[{url:'https://community.example.org/network/',protocol:'meshtastic',community:'c',kind:'registered-community',communityVerified:true,officialDomain:'community.example.org',directoryAttested:true}];
+ const fetchPage=async()=>({ok:true,headers:new Map([['content-type','text/html']]),text:async()=>'<div class="mesh-qr-card"><a class="region-channel-link" href="#">Open</a></div>'});
+ const r=await research({...cfg,maxPages:1},{seeds,fetchPage});
+ assert.equal(r.summary.approved,0);
+ assert.equal(r.pages[0].channelCard,true);
+ assert.equal(r.pages[0].channelLinks,1);
+});
