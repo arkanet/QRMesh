@@ -1,0 +1,18 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');const {discover,trustedSource,links}=require('./scanner');
+const v=n=>{const a=[];while(n>127){a.push((n&127)|128);n=Math.floor(n/128)}return [...a,n]};
+const f=(n,b)=>Buffer.from([...v(n*8+2),...v(b.length),...b]);
+const i=(n,x)=>Buffer.from([...v(n*8),...v(x)]);
+const ch=(name,key)=>Buffer.concat([f(2,Buffer.from(key)),f(3,Buffer.from(name))]);
+const uri=(channels,lora)=>'https://meshtastic.org/e/#'+Buffer.concat([...channels.map(c=>f(1,c)),...(lora?[f(2,lora)]:[])]).toString('base64url');
+const source='https://community.example.org/channels';
+const base=()=>({communities:[{id:'trusted',protocol:'meshtastic',resources:[{url:source},{url:'http://insecure.example.org'},{url:'https://127.0.0.1/internal'}]},{id:'other',protocol:'meshcore',resources:[{url:'https://meshcore.example.org'}]}],channels:[]});
+const page=html=>async()=>({ok:true,headers:new Map([['content-type','text/html']]),text:async()=>html});
+test('source gate rejects insecure, private and social domains',()=>{for(const s of ['http://community.example.org','https://127.0.0.1/','https://localhost/','https://discord.com/invite/x','https://x.local','https://user:pass@community.example.org'])assert.equal(trustedSource(s),false,s);assert.equal(trustedSource(source),true)});
+test('simulated scan imports valid channels, keeps provenance, skips non-Meshtastic',async()=>{const link=uri([ch('Alpha',[1]),ch('Beta',[2])]);const result=await discover(base(),{fetchPage:page('<a href="'+link+'">Join</a>'),now:'2026-10-30T00:00:00Z'});assert.equal(result.report.scanned,1);assert.equal(result.report.added,2);assert.equal(result.catalog.channels.length,2);assert.equal(result.catalog.channels[0].sourceUrl,source);assert.equal(result.report.date,'2026-10-30T00:00:00Z')});
+test('duplicate links and repeat scans do not duplicate channels or profiles',async()=>{const link=uri([ch('Alpha',[1])],Buffer.concat([i(2,4),i(7,3),i(10,20)]));const html=link+' '+link;const first=await discover(base(),{fetchPage:page(html)});assert.equal(first.report.added,1);assert.equal(first.report.profilesAdded,1);assert.deepEqual(first.catalog.loraProfiles[0].lora,{modemPreset:4,region:3,txPower:20});const second=await discover(first.catalog,{fetchPage:page(html)});assert.equal(second.report.added,0);assert.equal(second.report.profilesAdded,0);assert.deepEqual(second.catalog,first.catalog)});
+test('LoRa profile not generated if region or preset missing',async()=>{const link=uri([ch('Alpha',[1])],i(7,3));const r=await discover(base(),{fetchPage:page(link)});assert.equal(r.report.added,1);assert.equal(r.report.profilesAdded,0)});
+test('malformed link is quarantined and fetch failures are reported',async()=>{const bad='https://meshtastic.org/e/#CgQBAg';const r=await discover(base(),{fetchPage:page(bad)});assert.equal(r.report.pending.length,1);assert.equal(r.report.added,0);const e=await discover(base(),{fetchPage:async()=>{throw Error('offline')}});assert.equal(e.report.errors.length,1)});
+test('encoded fragment link is recognized',()=>{assert.equal(links('https://meshtastic.org/e/%23CgQBAg').length,1)});
+
+test('new LoRa profiles require manual approval',async()=>{const lora=Buffer.concat([i(2,4),i(7,3)]);const result=await discover(base(),{fetchPage:page(uri([ch('Alpha',[1])],lora))});assert.equal(result.report.profilesAdded,1);assert.equal(result.catalog.loraProfiles[0].verified,false);assert.equal(result.catalog.loraProfiles[0].verification,'pending-manual-review')});

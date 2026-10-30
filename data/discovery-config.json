@@ -1,0 +1,40 @@
+{
+  "keyword": "",
+  "keywords": {
+    "protocol": [
+      "meshtastic",
+      "meshcore",
+      "lora mesh",
+      "off-grid mesh"
+    ],
+    "community": [
+      "community",
+      "local group",
+      "regional network",
+      "rete mesh",
+      "gruppo locale",
+      "comunità"
+    ],
+    "channels": [
+      "channel",
+      "channels",
+      "canale",
+      "canali",
+      "psk",
+      "channel key",
+      "secret",
+      "join",
+      "import",
+      "qr code",
+      "channelset",
+      "configurazione"
+    ]
+  },
+  "maxDepth": 5,
+  "maxPages": 80,
+  "strategy": "adaptive",
+  "maxLinksPerPage": 25,
+  "publication": "automatic-evidence-gated",
+  "minimumIndependentSources": 3,
+  "agreementRatio": 0.75
+}
