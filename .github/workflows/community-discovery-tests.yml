@@ -1,0 +1,20 @@
+name: Community discovery tests
+on:
+  push:
+    branches: [feat/community-discovery-lora-profiles]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/discovery/*.test.js
+      - run: node --check scripts/discovery/nightly.js
+      - run: node --check scripts/discovery/meshtastic-link.js
