@@ -84,7 +84,7 @@ test('LoRa profile in valid community link is extracted and imported as unverifi
  assert.equal(found.length,1);
  assert.ok(found[0].lora);
  const original={communities:[{id:'official',name:'Official',protocol:'meshtastic'}],channels:[]};
- const candidate={...found[0],state:'APPROVED',community:'official',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',sourceUrls:['https://official.example.org/rete/']};
+ const candidate={...found[0],state:'APPROVED',community:'official',approvalBasis:'VERIFIED_COMMUNITY_SOURCE',communityVerified:true,officialSourceVerified:true,sourceUrls:['https://official.example.org/rete/']};
  const one=importApproved(original,[candidate]);
  assert.equal(one.profilesAdded.length,1);
  assert.equal(one.catalog.loraProfiles[0].verified,true);
