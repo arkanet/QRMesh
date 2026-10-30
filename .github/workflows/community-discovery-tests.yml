@@ -55,6 +55,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Inspect regional selectors and source scripts
+        run: node scripts/discovery/inspect-regions.js
       - name: Verify real source import and idempotent reimport
         run: node scripts/discovery/prepublish-check.js
       - name: Save prepublication report
