@@ -29,6 +29,16 @@ Anteprime **illustrative** (SVG, non screenshot del browser) delle modalità SIN
 - Layout desktop a griglia e **smartphone a colonna singola**, senza schede affiancate.
 - Nessun account o invio delle chiavi a un server applicativo; la libreria QR viene caricata da CDN.
 
+## Discovery e aggiornamento automatico
+
+Il catalogo condiviso `data/catalog.json` viene aggiornato dal workflow GitHub Actions **Community discovery nightly**, pianificato alle 03:00 (Europe/Rome) e avviabile anche manualmente.
+
+La discovery esplora fonti web pubbliche attraverso keyword, collegamenti e sottolivelli pertinenti, riconoscendo link di importazione Meshtastic e riferimenti MeshCore. I canali delle community referenziate vengono validati rispetto alle fonti ufficiali; gli altri richiedono riscontri indipendenti. Le PSK discordanti non sono sovrascritte senza evidenze verificabili di una rotazione più recente.
+
+Dai link Meshtastic vengono estratti anche eventuali parametri LoRa: i profili completi e coerenti di community verificate sono aggiunti al catalogo senza sostituire quelli esistenti. L'importazione evita duplicati e produce `data/discovery-report.json`; i dati approvati sono disponibili a SINGOLO, MULTI e bot tramite lo stesso catalogo.
+
+Configurazione e verifiche: [docs/community-discovery.md](docs/community-discovery.md).
+
 ## Note
 
 Le chiavi dei canali pubblici non garantiscono riservatezza. Verificare sempre canali, PSK, frequenza e regione radio con le fonti delle community. QRMesh è indipendente e non affiliato alle community citate. I link esterni possono cambiare.
