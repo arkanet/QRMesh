@@ -26,11 +26,11 @@ test('bot offers scoped and unscoped QR with force reply',()=>{
 });
 
 const geo=require('../data/italy-regional-scopes.json');
-test('Italy has three macroareas, 20 regions and 107 provinces',()=>{
+test('Italy has three macroareas, 20 regions and 110 provinces',()=>{
  assert.deepEqual(geo.groups.map(g=>g.name),['Nord','Centro e Sardegna','Sud e Sicilia']);
  const regions=geo.groups.flatMap(g=>g.regions);
  assert.equal(regions.length,20);
- assert.equal(regions.reduce((n,r)=>n+r.provinces.length,0),107);
+ assert.equal(regions.reduce((n,r)=>n+r.provinces.length,0),110);
  assert.equal(new Set(regions.map(r=>r.code)).size,20);
  assert.ok(regions.find(r=>r.code==='laz').provinces.some(p=>p.code==='rm'));
 });
