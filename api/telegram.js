@@ -2,6 +2,7 @@
 const QRCode = require('qrcode');
 const catalog = require('../data/catalog.json');
 const multi = require('./multi');
+const italyScopes = require('../data/italy-regional-scopes.json');
 
 const API = 'https://api.telegram.org';
 const BASE_URL = 'https://allqrmesh.vercel.app/';
@@ -16,9 +17,9 @@ function encodeVarint(n) {
   out.push(n); return out;
 }
 function field(n, data) { return Buffer.from([...encodeVarint(n * 8 + 2), ...encodeVarint(data.length), ...data]); }
-function importUrl(community, channel) {
+function importUrl(community, channel, scope='') {
   if (community.protocol === 'meshcore') {
-    return 'meshcore://channel/add?name=' + encodeURIComponent(channel.name) + '&secret=' + channel.key.toLowerCase();
+    return 'meshcore://channel/add?name=' + encodeURIComponent(channel.name) + '&secret=' + channel.key.toLowerCase() + (scope ? '&region_scope=' + encodeURIComponent(scope) : '');
   }
   const psk = Buffer.from(channel.key, 'base64');
   const settings = Buffer.concat([field(2, psk), field(3, Buffer.from(channel.name, 'utf8'))]);
@@ -70,6 +71,33 @@ async function send(chat_id, text, token, reply_markup) {
   await telegram('sendMessage', { chat_id, text, ...(reply_markup ? { reply_markup } : {}), disable_web_page_preview: true }, token);
 }
 async function registerCommands(token){await telegram('setMyCommands',{commands:BOT_COMMANDS,language_code:'it'},token);}
+function validScope(value){return value.length<=29&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);}
+async function deliverMeshCore(chat,index,scope,token){
+  const channel=catalog.channels[index];const community=catalog.communities.find(c=>c.id===channel.community);
+  if(!community||community.protocol!=='meshcore'||(scope&&!validScope(scope)))return;
+  const url=importUrl(community,channel,scope);
+  await photo(chat,community.name+' · '+channel.name+(scope?' · Scope: '+scope:' · Senza scope')+'\nVerifica la compatibilità della MeshCore App (1.47.0+ per scope).',url,token);
+  await send(chat,url,token);
+  await send(chat,channel.name,token);
+  await send(chat,channel.key.toLowerCase(),token);
+  if(scope)await send(chat,'Regional Scope: '+scope,token);
+}
+function scopeKeyboard(index){
+ const channel=catalog.channels[index],community=catalog.communities.find(c=>c.id===channel.community);
+ return buttons([row('🌐 Senza Regional Scope','rs:'+index+':none'),row('🇮🇹 Italia (it)','rs:'+index+':it'),row('🗺️ Scegli macroarea italiana','rs:'+index+':groups'),row('✍️ Inserisci manualmente','rs:'+index+':manual'),row('◀ Canali','single:'+community.id)]);
+}
+function groupScopeKeyboard(index){return buttons([...italyScopes.groups.map(g=>row(g.name,'rg:'+index+':'+g.id)),row('◀ Regional Scope','rs:'+index+':back')]);}
+function regionScopeKeyboard(index,groupId){
+ const group=italyScopes.groups.find(g=>g.id===groupId);
+ if(!group)return null;
+ return buttons([...group.regions.map(r=>row(r.name+' (it-'+r.code+')','rr:'+index+':'+r.code)),row('◀ Macroaree','rs:'+index+':groups')]);
+}
+function provinceScopeKeyboard(index,regionCode){
+ const region=italyScopes.groups.flatMap(g=>g.regions).find(r=>r.code===regionCode);
+ if(!region)return null;
+ const group=italyScopes.groups.find(g=>g.regions.some(r=>r.code===regionCode));
+ return buttons([row('✓ Usa solo regione (it-'+regionCode+')','rs:'+index+':region-'+regionCode),...region.provinces.map(p=>row(p.name+' ('+p.code.toUpperCase()+')','rp:'+index+':'+regionCode+':'+p.code)),row('◀ Regioni '+group.name,'rg:'+index+':'+group.id),row('◀ Macroaree','rs:'+index+':groups')]);
+}
 async function handle(update, token) {
   const cb = update.callback_query;
   const msg = update.message;
@@ -77,6 +105,8 @@ async function handle(update, token) {
   if (!chat) return;
   if (cb) await telegram('answerCallbackQuery', { callback_query_id: cb.id }, token);
   const data = cb?.data || '';
+  const replyTag=msg?.reply_to_message?.text?.match(/^QRMesh Regional Scope canale #(\d+)\b/);
+  if(replyTag){const index=Number(replyTag[1]);const channel=catalog.channels[index];const community=channel&&catalog.communities.find(c=>c.id===channel.community);if(!community||community.protocol!=='meshcore')return;const scope=(msg.text||'').trim();if(!validScope(scope)){await send(chat,'Scope non valido: usa minuscole, numeri e trattini (es. it-laz). Riprova rispondendo al messaggio precedente.',token);return;}await deliverMeshCore(chat,index,scope,token);return;}
   const command = (msg?.text || '').trim().split(/\s+/)[0].split('@')[0].toLowerCase();
   if(command==='/start'||command==='/restart'||data==='home'){
     if(command==='/start'||command==='/restart')try{await registerCommands(token)}catch(e){console.error('setMyCommands:',e.message)}
@@ -99,6 +129,22 @@ async function handle(update, token) {
   if(data.startsWith('qrpick:')||data.startsWith('linkpick:')){
     const [purpose,id]=data.split(':');const c=catalog.communities.find(x=>x.id===id);if(!c)return;
     await send(chat,'Seleziona un canale di '+c.name+':',token,channelKeyboard(id,0,purpose==='linkpick'?'link':'qr'));return;
+  }
+  if(data.startsWith('rs:')||data.startsWith('rg:')||data.startsWith('rr:')||data.startsWith('rp:')){
+    const [kind,rawIndex,arg,extra]=data.split(':');const index=Number(rawIndex);
+    const channel=catalog.channels[index],community=channel&&catalog.communities.find(c=>c.id===channel.community);
+    if(!Number.isSafeInteger(index)||!community||community.protocol!=='meshcore')return;
+    if(kind==='rs'){
+      if(arg==='manual'){await telegram('sendMessage',{chat_id:chat,text:'QRMesh Regional Scope canale #'+index+'\nRispondi a questo messaggio con il codice esatto (es. it-laz-rm).',reply_markup:{force_reply:true,selective:true}},token);return;}
+      if(arg==='none'||arg==='it'){await deliverMeshCore(chat,index,arg==='it'?'it':'',token);return;}
+      if(arg.startsWith('region-')){const code=arg.slice(7);const region=italyScopes.groups.flatMap(g=>g.regions).find(r=>r.code===code);if(region)await deliverMeshCore(chat,index,'it-'+code,token);return;}
+      if(arg==='groups'){await send(chat,'Seleziona una macroarea italiana:',token,groupScopeKeyboard(index));return;}
+      if(arg==='back'){await send(chat,'Regional Scope MeshCore:',token,scopeKeyboard(index));return;}
+    }
+    if(kind==='rg'){const kb=regionScopeKeyboard(index,arg);if(kb)await send(chat,'Seleziona una regione:',token,kb);return;}
+    if(kind==='rr'){const kb=provinceScopeKeyboard(index,arg);if(kb)await send(chat,'Regione it-'+arg+'. Vuoi aggiungere la provincia? Puoi scegliere solo la regione oppure tornare indietro.',token,kb);return;}
+    if(kind==='rp'){const region=italyScopes.groups.flatMap(g=>g.regions).find(r=>r.code===arg);if(region?.provinces.some(p=>p.code===extra))await deliverMeshCore(chat,index,'it-'+arg+'-'+extra,token);return;}
+    return;
   }
   if (data.startsWith('multi:')) { const ci=Number(data.slice(6));if(!Number.isSafeInteger(ci)||!catalog.communities[ci]||catalog.communities[ci].protocol!=='meshtastic')return;const result=multi.startSelected(ci);await send(chat,result.text,token,result.reply_markup);return; }
   if (data.startsWith('m:')) { try {const result=multi.next(data);if(result.url)await photo(chat,result.caption+'\n'+result.url,result.url,token);else await send(chat,result.text,token,result.reply_markup);}catch(error){await send(chat,'Configurazione non valida: '+error.message+'\nRiparti dalla community con /start.',token);}return; }
@@ -126,10 +172,7 @@ async function handle(update, token) {
     const c = catalog.communities.find(x => x.id === channel.community);
     const url = importUrl(c, channel);
     if (c.protocol === 'meshcore') {
-      await photo(chat, c.name + ' · ' + channel.name + '\nVerifica preset, regione e frequenza radio.', url, token);
-      await send(chat, url, token);
-      await send(chat, channel.name, token);
-      await send(chat, channel.key.toLowerCase(), token);
+      await send(chat,'Vuoi inserire un Regional Scope nel QR di '+channel.name+'?\\nSeleziona uno scope suggerito, inseriscilo manualmente oppure continua senza scope.',token,scopeKeyboard(index));
     } else if(data.startsWith('l:')) await send(chat,'🔗 '+c.name+' · '+channel.name+'\n'+url+'\nVerifica preset, regione e frequenza radio.',token,buttons([[{text:'📷 Mostra QR',callback_data:'q:'+index}],[{text:'📖 Comandi',callback_data:'help'}]]));
     else await photo(chat, c.name + ' · ' + channel.name + '\n' + url + '\nVerifica preset, regione e frequenza radio.', url, token);
     return;
