@@ -12,7 +12,7 @@ test('catalog only exposes scoped suggestions for MeshCore community',()=>{
  assert.ok(italy.regionalScopesSource.startsWith('https://'));
 });
 test('web exposes none, known, manual and QR parameter',()=>{
- for(const id of ['scopeMode','scopeKnown','scopeManualWrap'])assert.ok(web.includes('id="'+id+'"'));
+ for(const id of ['scopeMode','scopeGroup','scopeManualWrap'])assert.ok(web.includes('id="'+id+'"'));
  assert.match(web,/region_scope=/);
  assert.match(web,/encodeURIComponent\(getScope\(\)\)/);
 });
@@ -22,7 +22,7 @@ test('bot offers scoped and unscoped QR with force reply',()=>{
  assert.match(bot,/force_reply:true/);
  assert.match(bot,/region_scope=/);
  assert.match(bot,/function deliverMeshCore/);
- assert.match(bot,/if\(choice==='none'\)/);
+ assert.match(bot,/arg==='none'/);
 });
 
 const geo=require('../data/italy-regional-scopes.json');
