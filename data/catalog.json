@@ -77,26 +77,9 @@
       ],
       "regionalScopes": [
         "it",
-        "it-abr",
-        "it-bas",
-        "it-cal",
-        "it-cam",
-        "it-ero",
-        "it-fvg",
         "it-laz",
-        "it-lig",
-        "it-lom",
-        "it-mar",
-        "it-mol",
-        "it-pie",
         "it-pug",
-        "it-sar",
-        "it-sic",
-        "it-tos",
-        "it-taa",
-        "it-umb",
-        "it-vda",
-        "it-ven"
+        "it-pug-le"
       ],
       "regionalScopesSource": "https://www.meshcoreitalia.it/regional-scope/"
     },
