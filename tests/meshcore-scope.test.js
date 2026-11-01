@@ -14,7 +14,8 @@ test('catalog only exposes scoped suggestions for MeshCore community',()=>{
 test('web exposes none, known, manual and QR parameter',()=>{
  for(const id of ['scopeMode','scopeGroup','scopeManualWrap'])assert.ok(web.includes('id="'+id+'"'));
  assert.match(web,/region_scope=/);
- assert.match(web,/encodeURIComponent\(getScope\(\)\)/);
+ assert.match(web,/const scope=getScope\(\)/);
+ assert.match(web,/encodeURIComponent\(scope\)/);
 });
 test('bot offers scoped and unscoped QR with force reply',()=>{
  assert.match(bot,/function scopeKeyboard/);
@@ -44,4 +45,12 @@ test('bot has hierarchical navigation and region-only and province scopes',()=>{
 test('web offers Italian macroarea region and province selectors',()=>{
  for(const id of ['scopeGroup','scopeRegion','scopeProvince','scopeBack','scopeCountry'])assert.ok(web.includes('id="'+id+'"'));
  assert.match(web,/italy-regional-scopes\.json/);
+});
+
+test('scope generator is synchronous and cannot encode Promise into QR',()=>{
+ assert.match(web,/function getScope\(\)/);
+ assert.doesNotMatch(web,/async function getScope\(\)/);
+ assert.match(web,/const scope=getScope\(\)/);
+ assert.match(web,/encodeURIComponent\(scope\)/);
+ assert.doesNotMatch(web,/encodeURIComponent\(getScope\(\)\)/);
 });
