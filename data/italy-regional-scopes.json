@@ -368,7 +368,11 @@
           "provinces": [
             {
               "code": "ca",
-              "name": "Cagliari"
+              "name": "Città metropolitana di Cagliari"
+            },
+            {
+              "code": "ss",
+              "name": "Città metropolitana di Sassari"
             },
             {
               "code": "nu",
@@ -379,12 +383,20 @@
               "name": "Oristano"
             },
             {
-              "code": "ss",
-              "name": "Sassari"
+              "code": "ot",
+              "name": "Gallura Nord-Est Sardegna"
+            },
+            {
+              "code": "og",
+              "name": "Ogliastra"
             },
             {
               "code": "su",
-              "name": "Sud Sardegna"
+              "name": "Sulcis Iglesiente"
+            },
+            {
+              "code": "vs",
+              "name": "Medio Campidano"
             }
           ]
         }
@@ -570,5 +582,6 @@
         }
       ]
     }
-  ]
+  ],
+  "provinceSource": "https://www.statocitta.pcm.gov.it/home/notizie-e-comunicati/2026/sardegna-nuove-sigle-automobilistiche-per-quattro-province/"
 }
