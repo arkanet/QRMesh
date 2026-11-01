@@ -74,7 +74,14 @@
           "title": "Telegram",
           "url": "https://t.me/meshcoreitalia"
         }
-      ]
+      ],
+      "regionalScopes": [
+        "it",
+        "it-laz",
+        "it-pug",
+        "it-pug-le"
+      ],
+      "regionalScopesSource": "https://www.meshcoreitalia.it/regional-scope/"
     },
     {
       "id": "bayarea",
