@@ -75,7 +75,7 @@ async function deliverMeshCore(chat,index,scope,token){
   const channel=catalog.channels[index];const community=catalog.communities.find(c=>c.id===channel.community);
   if(!community||community.protocol!=='meshcore'||(scope&&!validScope(scope)))return;
   const url=importUrl(community,channel,scope);
-  await photo(chat,community.name+' · '+channel.name+(scope?' · Scope: '+scope:' · Senza scope')+'\\nVerifica la compatibilità della MeshCore App (1.47.0+ per scope).',url,token);
+  await photo(chat,community.name+' · '+channel.name+(scope?' · Scope: '+scope:' · Senza scope')+'\nVerifica la compatibilità della MeshCore App (1.47.0+ per scope).',url,token);
   await send(chat,url,token);
   await send(chat,channel.name,token);
   await send(chat,channel.key.toLowerCase(),token);
@@ -93,7 +93,7 @@ async function handle(update, token) {
   if (!chat) return;
   if (cb) await telegram('answerCallbackQuery', { callback_query_id: cb.id }, token);
   const data = cb?.data || '';
-  const replyTag=msg?.reply_to_message?.text?.match(/^QRMesh Regional Scope canale #(\\d+)\\b/);
+  const replyTag=msg?.reply_to_message?.text?.match(/^QRMesh Regional Scope canale #(\d+)\b/);
   if(replyTag){const index=Number(replyTag[1]);const channel=catalog.channels[index];const community=channel&&catalog.communities.find(c=>c.id===channel.community);if(!community||community.protocol!=='meshcore')return;const scope=(msg.text||'').trim();if(!validScope(scope)){await send(chat,'Scope non valido: usa minuscole, numeri e trattini (es. it-laz). Riprova rispondendo al messaggio precedente.',token);return;}await deliverMeshCore(chat,index,scope,token);return;}
   const command = (msg?.text || '').trim().split(/\s+/)[0].split('@')[0].toLowerCase();
   if(command==='/start'||command==='/restart'||data==='home'){
@@ -122,7 +122,7 @@ async function handle(update, token) {
     const [,rawIndex,choice]=data.split(':');const index=Number(rawIndex);const channel=catalog.channels[index];
     const community=channel&&catalog.communities.find(c=>c.id===channel.community);
     if(!Number.isSafeInteger(index)||!community||community.protocol!=='meshcore')return;
-    if(choice==='manual'){await telegram('sendMessage',{chat_id:chat,text:'QRMesh Regional Scope canale #'+index+'\\nRispondi a questo messaggio con il codice esatto (es. it-laz).',reply_markup:{force_reply:true,selective:true}},token);return;}
+    if(choice==='manual'){await telegram('sendMessage',{chat_id:chat,text:'QRMesh Regional Scope canale #'+index+'\nRispondi a questo messaggio con il codice esatto (es. it-laz).',reply_markup:{force_reply:true,selective:true}},token);return;}
     if(choice==='none'){await deliverMeshCore(chat,index,'',token);return;}
     const scope=community.regionalScopes?.[Number(choice)];
     if(scope&&validScope(scope))await deliverMeshCore(chat,index,scope,token);
