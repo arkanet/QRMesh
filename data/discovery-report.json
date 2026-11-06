@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-30T14:22:19.389Z",
+  "date": "2026-11-06T02:14:09.679Z",
   "summary": {
     "pages": 80,
     "observations": 65,
     "approved": 22
   },
-  "added": 15,
+  "added": 0,
   "updated": [],
   "conflicts": [],
   "errors": [
@@ -38,8 +38,8 @@
       "error": "HTTP 404"
     },
     {
-      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
-      "error": "fetch failed"
+      "url": "https://www.seeedstudio.com/blog/2026/03/17/meshtastic-node-guide/",
+      "error": "HTTP 403"
     },
     {
       "url": "https://bayareameshcore.com/channels",
@@ -50,79 +50,83 @@
       "error": "HTTP 404"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/abruzzo/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/abruzzo/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/basilicata/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/basilicata/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/calabria/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/calabria/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/campania/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/campania/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/emilia-romagna/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/emilia-romagna/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/friuli-venezia-giulia/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/friuli-venezia-giulia/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/lazio/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lazio/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/liguria/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/liguria/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/lombardia/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lombardia/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/marche/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/marche/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/molise/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/molise/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/piemonte/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/piemonte/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/puglia/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/puglia/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/sardegna/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sardegna/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/sicilia/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sicilia/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/toscana/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/toscana/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/trentino-alto-adige/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/trentino-alto-adige/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/umbria/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/umbria/",
       "error": "fetch failed"
     },
     {
-      "url": "https://www.meshcoreitalia.it/regional-scope/valle-d-aosta/",
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/valle-d-aosta/",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/veneto/",
       "error": "fetch failed"
     },
     {
