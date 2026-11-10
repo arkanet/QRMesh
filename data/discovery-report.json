@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-09T02:14:56.882Z",
+  "date": "2026-11-10T02:13:25.561Z",
   "summary": {
     "pages": 80,
     "observations": 65,
@@ -9,10 +9,6 @@
   "updated": [],
   "conflicts": [],
   "errors": [
-    {
-      "url": "https://prepperitalia.altervista.org/",
-      "error": "HTTP 500"
-    },
     {
       "url": "https://sos-italia.net/rete/calabria/",
       "error": "HTTP 404"
@@ -42,12 +38,12 @@
       "error": "HTTP 404"
     },
     {
-      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
-      "error": "fetch failed"
-    },
-    {
       "url": "https://www.seeedstudio.com/blog/2026/03/17/meshtastic-node-guide/",
       "error": "HTTP 403"
+    },
+    {
+      "url": "https://en.m.wikipedia.org/wiki/Meshcore",
+      "error": "fetch failed"
     },
     {
       "url": "https://bayareameshcore.com/channels",
