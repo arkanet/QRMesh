@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-11T02:12:53.234Z",
+  "date": "2026-11-12T02:13:32.386Z",
   "summary": {
     "pages": 80,
     "observations": 65,
@@ -38,8 +38,8 @@
       "error": "HTTP 404"
     },
     {
-      "url": "https://www.seeedstudio.com/blog/2026/03/17/meshtastic-node-guide/",
-      "error": "HTTP 403"
+      "url": "https://en.m.wikipedia.org/wiki/Meshcore",
+      "error": "fetch failed"
     },
     {
       "url": "https://bayareameshcore.com/channels",
