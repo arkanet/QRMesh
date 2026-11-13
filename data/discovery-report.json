@@ -1,14 +1,22 @@
 {
-  "date": "2026-11-12T02:13:32.386Z",
+  "date": "2026-11-13T02:12:30.351Z",
   "summary": {
     "pages": 80,
-    "observations": 65,
+    "observations": 63,
     "approved": 22
   },
   "added": 0,
   "updated": [],
   "conflicts": [],
   "errors": [
+    {
+      "url": "https://www.meshcoreitalia.it/canali-regionali/",
+      "error": "HTTP 500"
+    },
+    {
+      "url": "https://www.meshcoreitalia.it/",
+      "error": "HTTP 500"
+    },
     {
       "url": "https://sos-italia.net/rete/calabria/",
       "error": "HTTP 404"
@@ -38,6 +46,10 @@
       "error": "HTTP 404"
     },
     {
+      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
+      "error": "fetch failed"
+    },
+    {
       "url": "https://en.m.wikipedia.org/wiki/Meshcore",
       "error": "fetch failed"
     },
@@ -48,82 +60,6 @@
     {
       "url": "https://meshtastic.org/E/",
       "error": "HTTP 404"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/abruzzo/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/basilicata/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/calabria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/campania/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/emilia-romagna/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/friuli-venezia-giulia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lazio/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/liguria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lombardia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/marche/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/molise/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/piemonte/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/puglia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sardegna/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sicilia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/toscana/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/trentino-alto-adige/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/umbria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/valle-d-aosta/",
-      "error": "fetch failed"
     },
     {
       "url": "https://bayareameshcore.com/recommended-devices",
@@ -152,28 +88,17 @@
     {
       "url": "https://whatsapp.com/channel/0029Vb5ku40CRs1m9V1Ysa1j",
       "error": "fetch failed"
+    },
+    {
+      "url": "https://github.com/meshtastic/firmware/stargazers",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://github.com/meshtastic/meshtastic/stargazers",
+      "error": "HTTP 404"
     }
   ],
   "candidates": [
-    {
-      "protocol": "meshcore",
-      "community": "meshcoreitalia.it",
-      "name": "Public",
-      "keyFingerprint": "1a45e11b73dad068",
-      "state": "DISCOVERED",
-      "approvalBasis": null,
-      "communityVerified": false,
-      "officialSourceVerified": false,
-      "sourceCount": 1,
-      "required": 3,
-      "independentDomains": 1,
-      "conflict": false,
-      "lora": null,
-      "loraConflict": false,
-      "sourceUrls": [
-        "https://www.meshcoreitalia.it/canali-regionali/"
-      ]
-    },
     {
       "protocol": "meshtastic",
       "community": "loraitalia",
@@ -674,25 +599,6 @@
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/veneto/"
-      ]
-    },
-    {
-      "protocol": "meshcore",
-      "community": "meshcoreitalia.it",
-      "name": "Canali regionali Allerta Meteo",
-      "keyFingerprint": "37a70fa7dea5299c",
-      "state": "DISCOVERED",
-      "approvalBasis": null,
-      "communityVerified": false,
-      "officialSourceVerified": false,
-      "sourceCount": 1,
-      "required": 3,
-      "independentDomains": 1,
-      "conflict": false,
-      "lora": null,
-      "loraConflict": false,
-      "sourceUrls": [
-        "https://www.meshcoreitalia.it/canali-allerta-meteo/"
       ]
     }
   ]
