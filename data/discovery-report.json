@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-18T02:14:24.676Z",
+  "date": "2026-11-19T02:13:51.622Z",
   "summary": {
     "pages": 80,
     "observations": 65,
@@ -36,6 +36,10 @@
     {
       "url": "https://sos-italia.net/rete/valle-d-aosta/",
       "error": "HTTP 404"
+    },
+    {
+      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
+      "error": "fetch failed"
     },
     {
       "url": "https://meshcoreone.com/",
