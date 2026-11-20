@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-19T02:13:51.622Z",
+  "date": "2026-11-20T02:13:37.761Z",
   "summary": {
     "pages": 80,
     "observations": 65,
@@ -42,8 +42,8 @@
       "error": "fetch failed"
     },
     {
-      "url": "https://meshcoreone.com/",
-      "error": "HTTP 403"
+      "url": "https://en.m.wikipedia.org/wiki/Meshcore",
+      "error": "fetch failed"
     },
     {
       "url": "https://bayareameshcore.com/channels",
