@@ -534,6 +534,16 @@
       "sources": [
         "https://sos-italia.net/rete/veneto/"
       ]
+    },
+    {
+      "community": "sositalia",
+      "name": "SOS-Test",
+      "key": "T05cpEq6hUTmIDApzZA1qtOH2BDlPBeCxz0mdeYsNyg=",
+      "approved": true,
+      "verification": "verified-community-source",
+      "sources": [
+        "https://sos-italia.net/rete/"
+      ]
     }
   ],
   "loraProfiles": [
