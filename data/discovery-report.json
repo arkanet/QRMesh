@@ -1,11 +1,11 @@
 {
-  "date": "2026-11-23T02:15:20.930Z",
+  "date": "2026-11-24T02:15:05.760Z",
   "summary": {
     "pages": 80,
     "observations": 63,
     "approved": 23
   },
-  "added": 1,
+  "added": 0,
   "updated": [],
   "conflicts": [],
   "errors": [
@@ -38,6 +38,10 @@
       "error": "HTTP 404"
     },
     {
+      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
+      "error": "fetch failed"
+    },
+    {
       "url": "https://meshcore.co.uk/",
       "error": "HTTP 403"
     },
@@ -54,103 +58,7 @@
       "error": "HTTP 404"
     },
     {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/abruzzo/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/basilicata/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/calabria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/campania/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/emilia-romagna/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/friuli-venezia-giulia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lazio/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/liguria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/lombardia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/marche/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/molise/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/piemonte/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/puglia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sardegna/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/sicilia/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/toscana/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/trentino-alto-adige/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/umbria/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/valle-d-aosta/",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/recommended-devices",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/companion-setup",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/repeater-setup",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/bots",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/blog",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://bayareameshcore.com/about",
+      "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTozODcwNDU5MzQ5MzI5MjUwOjE3OTU0ODY0NzA6c3BfYXRmOjMwMTY4OTk0MDQ0NjcwMjo6MDo6&url=%2FRadioCore-NRF52840-Development-Communication-Meshtastic%2Fdp%2FB0HMRMYPGR%2Fref%3Dsr_1_1_sspa%3Fdib%3DeyJ2IjoiMSJ9.zIMqbUWVgUPpooqejUyj4Qh63cLt6i4LUR1IAjdfFNz2QOdLnZECc2mzi1li_HlNtfjOVI55cUMQvYDMQNw1UM04A613bLDLjDQg899FFfJnkeSmU2h01lpvoMKCPHKkxadPWfsBZjLxX2HhcVrUfpsQ72Mlwlms3OLu0lQgkqDdQBAxukc-MSvArO0vWnE1js2LAmE-04qHBGI04LWepZIhQ8ANFbAVefm14hk0YRA.HFetupseiHZVhfiRebvRyAKQMqYVk7cJ8bVx8mNcNQg%26dib_tag%3Dse%26keywords%3Dmeshcore%26qid%3D1795486470%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1",
       "error": "fetch failed"
     }
   ],
