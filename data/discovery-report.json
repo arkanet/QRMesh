@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-26T02:14:25.341Z",
+  "date": "2026-11-27T02:14:35.338Z",
   "summary": {
     "pages": 80,
-    "observations": 63,
+    "observations": 52,
     "approved": 23
   },
   "added": 0,
@@ -46,16 +46,16 @@
       "error": "HTTP 403"
     },
     {
+      "url": "https://en.m.wikipedia.org/wiki/Meshcore",
+      "error": "fetch failed"
+    },
+    {
       "url": "https://www.amazon.com/meshcore/s?k=meshcore",
       "error": "HTTP 503"
     },
     {
       "url": "https://bayareameshcore.com/channels",
       "error": "fetch failed"
-    },
-    {
-      "url": "https://meshtastic.org/E/",
-      "error": "HTTP 404"
     },
     {
       "url": "https://www.meshcoreitalia.it/meshcore-e-regional-scope-cose-e-come-funziona/abruzzo/",
@@ -432,11 +432,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/basilicata/"
@@ -455,11 +451,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/campania/"
@@ -478,11 +470,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/emilia-romagna/"
@@ -501,11 +489,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/lazio/"
@@ -524,11 +508,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/lombardia/"
@@ -547,11 +527,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/marche/"
@@ -570,11 +546,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/molise/"
@@ -593,11 +565,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/piemonte/"
@@ -616,11 +584,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/puglia/"
@@ -639,11 +603,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/toscana/"
@@ -662,11 +622,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/umbria/"
@@ -685,11 +641,7 @@
       "required": 3,
       "independentDomains": 1,
       "conflict": false,
-      "lora": {
-        "modemPreset": 4,
-        "region": 3,
-        "txPower": 27
-      },
+      "lora": null,
       "loraConflict": false,
       "sourceUrls": [
         "https://sos-italia.net/rete/veneto/"
