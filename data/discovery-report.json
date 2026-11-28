@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-27T02:14:35.338Z",
+  "date": "2026-11-28T02:13:20.033Z",
   "summary": {
     "pages": 80,
     "observations": 52,
@@ -38,20 +38,20 @@
       "error": "HTTP 404"
     },
     {
+      "url": "https://en.m.wikipedia.org/wiki/Meshtastic",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.seeedstudio.com/blog/2026/03/17/meshtastic-node-guide/",
+      "error": "HTTP 403"
+    },
+    {
       "url": "https://meshcore.co.uk/",
       "error": "HTTP 403"
     },
     {
       "url": "https://meshcore.co.uk/flasher.html",
       "error": "HTTP 403"
-    },
-    {
-      "url": "https://en.m.wikipedia.org/wiki/Meshcore",
-      "error": "fetch failed"
-    },
-    {
-      "url": "https://www.amazon.com/meshcore/s?k=meshcore",
-      "error": "HTTP 503"
     },
     {
       "url": "https://bayareameshcore.com/channels",
